@@ -1,0 +1,38 @@
+{
+  "yield_curve_spread": {
+    "label": "Yield Curve (10yr - 3m)",
+    "value": 0.53,
+    "unit": "pct pts",
+    "trend": "rising"
+  },
+  "cpi_yoy": {
+    "label": "CPI Headline YoY",
+    "value": 2.83,
+    "unit": "%",
+    "trend": "rising"
+  },
+  "unemployment_gap": {
+    "label": "UR minus NAIRU",
+    "value": -0.1,
+    "unit": "pct pts",
+    "trend": "rising"
+  },
+  "output_gap": {
+    "label": "Output Gap (% of Potential)",
+    "value": 32.25,
+    "unit": "%",
+    "trend": "rising"
+  },
+  "sp500_eps": {
+    "label": "S&P 500 EPS (Index)",
+    "value": 3.46,
+    "unit": "index",
+    "trend": "falling"
+  },
+  "fed_funds_rate": {
+    "label": "Fed Funds Rate",
+    "value": 3.64,
+    "unit": "%",
+    "trend": "falling"
+  }
+}

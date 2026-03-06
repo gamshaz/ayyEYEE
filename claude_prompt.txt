@@ -1,0 +1,112 @@
+You are a Chief Investment Officer and macro analyst.
+Today's date: 2026-03-06
+
+=============================================================
+TASK A — MACRO INDICATOR INTERPRETATION
+=============================================================
+Below are the latest FRED economic indicators (Jan 2023 to 2026-03-06).
+For each one, provide a ONE-LINE interpretation (max 15 words) explaining
+what it signals for markets. Then write a 3-4 sentence MACRO REGIME NARRATIVE.
+
+FRED INDICATORS:
+  yield_curve_spread              Yield Curve (10yr - 3m)                             0.530 pct pts     ↑ RISING
+  cpi_yoy                         CPI Headline YoY                                    2.830 %           ↑ RISING
+  unemployment_gap                UR minus NAIRU                                     -0.100 pct pts     ↑ RISING
+  output_gap                      Output Gap (% of Potential)                        32.250 %           ↑ RISING
+  sp500_eps                       S&P 500 EPS (Index)                                 3.460 index       ↓ FALLING
+  fed_funds_rate                  Fed Funds Rate                                      3.640 %           ↓ FALLING
+
+=============================================================
+TASK B — AXIS SCORING & PORTFOLIO ALLOCATION
+=============================================================
+Using the full macro picture above, score each of these 4 axes:
+  1. Defensive vs Cyclical
+  2. Growth vs Value
+  3. High Beta vs Low Beta
+  4. US vs Emerging Markets
+
+For each axis: state which side is favored, confidence (0.0-1.0),
+and 2-3 sentences of reasoning using ALL indicators holistically.
+
+Then allocate across all 16 strategy buckets:
+  DGHU: XBI     (axes: D/G/H/U)
+  DGHE: EMQQ    (axes: D/G/H/E)
+  DGLU: XLV     (axes: D/G/L/U)
+  DGLE: INDA    (axes: D/G/L/E)
+  DVHU: SDY     (axes: D/V/H/U)
+  DVHE: EELV    (axes: D/V/H/E)
+  DVLU: SPLV    (axes: D/V/L/U)
+  DVLE: EELV    (axes: D/V/L/E)
+  CGHU: SMH     (axes: C/G/H/U)
+  CGHE: EEM     (axes: C/G/H/E)
+  CGLU: QQQM    (axes: C/G/L/U)
+  CGLE: CQQQ    (axes: C/G/L/E)
+  CVHU: XLE     (axes: C/V/H/U)
+  CVHE: AVES    (axes: C/V/H/E)
+  CVLU: XLI     (axes: C/V/L/U)
+  CVLE: FEMS    (axes: C/V/L/E)
+
+Axes key: D=Defensive, C=Cyclical, G=Growth, V=Value,
+          H=High Beta, L=Low Beta, U=US, E=Emerging Markets
+
+HARD CONSTRAINTS:
+- All 16 weights must sum to EXACTLY 100.0
+- No single bucket > 40%
+- No sub-strategy (D, C, G, V, H, L, U, E) total > 70%
+- Minimum weight per bucket: 0.5%
+- No cash — fully invested
+
+=============================================================
+RESPONSE FORMAT — return ONLY this JSON, nothing else:
+=============================================================
+{
+  "interpretations": {
+    "yield_curve_spread": "one-line interpretation",
+    "cpi_yoy": "one-line interpretation",
+    "unemployment_gap": "one-line interpretation",
+    "output_gap": "one-line interpretation",
+    "sp500_eps": "one-line interpretation",
+    "fed_funds_rate": "one-line interpretation"
+  },
+  "macro_regime_narrative": "3-4 sentence narrative here",
+  "axis_scores": {
+    "defensive_cyclical": {
+      "favored": "Defensive or Cyclical",
+      "confidence": 0.0,
+      "reasoning": "2-3 sentences"
+    },
+    "growth_value": {
+      "favored": "Growth or Value",
+      "confidence": 0.0,
+      "reasoning": "2-3 sentences"
+    },
+    "high_low_beta": {
+      "favored": "High Beta or Low Beta",
+      "confidence": 0.0,
+      "reasoning": "2-3 sentences"
+    },
+    "us_em": {
+      "favored": "US or Emerging Markets",
+      "confidence": 0.0,
+      "reasoning": "2-3 sentences"
+    }
+  },
+  "allocation": [
+    {"strategy_bucket": "DGHU", "ticker": "XBI",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DGHE", "ticker": "EMQQ", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DGLU", "ticker": "XLV",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DGLE", "ticker": "INDA", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DVHU", "ticker": "SDY",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DVHE", "ticker": "EELV", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DVLU", "ticker": "SPLV", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "DVLE", "ticker": "EELV", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CGHU", "ticker": "SMH",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CGHE", "ticker": "EEM",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CGLU", "ticker": "QQQM", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CGLE", "ticker": "CQQQ", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CVHU", "ticker": "XLE",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CVHE", "ticker": "AVES", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CVLU", "ticker": "XLI",  "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CVLE", "ticker": "FEMS", "weight_pct": 0.0, "rationale": "one line"}
+  ]
+}

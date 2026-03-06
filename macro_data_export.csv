@@ -1,0 +1,7 @@
+key,indicator,value,unit,trend
+yield_curve_spread,Yield Curve (10yr - 3m),0.53,pct pts,rising
+cpi_yoy,CPI Headline YoY,2.83,%,rising
+unemployment_gap,UR minus NAIRU,-0.1,pct pts,rising
+output_gap,Output Gap (% of Potential),32.25,%,rising
+sp500_eps,S&P 500 EPS (Index),3.46,index,falling
+fed_funds_rate,Fed Funds Rate,3.64,%,falling
