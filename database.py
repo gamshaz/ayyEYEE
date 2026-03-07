@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DB_PATH = "finance_game.db"
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "finance_game.db")
 
 # ETF universe mapping: strategy bucket -> ticker
 ETF_UNIVERSE = {
@@ -114,7 +114,7 @@ def get_simulation_state():
     # Retrieves the latest simulation row (date + balances)
     conn = get_connection()
     c = conn.cursor()
-    c.execute("SELECT current_date, cash_balance, total_portfolio_value FROM simulation ORDER BY id DESC LIMIT 1")
+    c.execute('SELECT "current_date", cash_balance, total_portfolio_value FROM simulation ORDER BY id DESC LIMIT 1')
     row = c.fetchone()
     conn.close()
     if row:

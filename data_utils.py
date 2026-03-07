@@ -9,9 +9,12 @@ load_dotenv()
 
 FRED_API_KEY = os.getenv("FRED_API_KEY")
 
-# Date bounds for macro analysis
+# FRED macro data: fetch January 2023 to present for regime analysis
 MACRO_START = "2023-01-01"
 MACRO_END   = datetime.today().strftime("%Y-%m-%d")
+
+# Price simulation: January 2026 → March 2026 (current sim window)
+# Warmup data: December 1–31 2025 (ensures indicators populated from sim day 1)
 
 # All ETF tickers used in the universe
 ALL_TICKERS = [
@@ -38,6 +41,7 @@ def get_etf_price(ticker: str, as_of_date: str = None) -> float:
             end = (datetime.strptime(as_of_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
             start = (datetime.strptime(as_of_date, "%Y-%m-%d") - timedelta(days=10)).strftime("%Y-%m-%d")
             df = yf.download(ticker, start=start, end=end, progress=False, auto_adjust=True)
+            # ANTI-LOOKAHEAD: never use prices beyond current simulation date
             df = df[df.index <= as_of_date]
         else:
             df = yf.download(ticker, period="5d", progress=False, auto_adjust=True)
@@ -54,6 +58,9 @@ def get_etf_prices_bulk(tickers: list, start_date: str, end_date: str) -> pd.Dat
     """
     Downloads adjusted close prices for multiple tickers over a date range.
     Returns a DataFrame with dates as index and tickers as columns.
+
+    IMPORTANT: end_date is exclusive in yfinance. Always pass end_date as
+    (simulation_date + 1 day) and then apply the anti-lookahead filter below.
     """
     try:
         raw = yf.download(tickers, start=start_date, end=end_date, progress=False, auto_adjust=True)
@@ -66,6 +73,21 @@ def get_etf_prices_bulk(tickers: list, start_date: str, end_date: str) -> pd.Dat
     except Exception as e:
         print(f"[data_utils] Error fetching bulk prices: {e}")
         return pd.DataFrame()
+
+
+def get_price_history_with_warmup(as_of_date: str, warmup_start: str = "2025-12-01") -> pd.DataFrame:
+    """
+    Fetches full price history from warmup_start through as_of_date for all ETFs.
+    Used by the tactical agent to ensure indicators are populated from Jan 2026 day 1.
+
+    ANTI-LOOKAHEAD: prices are strictly filtered to ≤ as_of_date.
+    """
+    end_date = (datetime.strptime(as_of_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+    df = get_etf_prices_bulk(ALL_TICKERS, start_date=warmup_start, end_date=end_date)
+    if not df.empty:
+        # ANTI-LOOKAHEAD: never use prices beyond current simulation date
+        df = df[df.index <= as_of_date]
+    return df
 
 
 def get_all_current_prices(as_of_date: str = None) -> dict:

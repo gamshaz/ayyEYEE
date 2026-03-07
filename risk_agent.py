@@ -12,10 +12,59 @@ Constraints:
 """
 
 from typing import List, Dict, Any, Tuple
+import database as dbmod
+from macro_agent import BUCKET_AXES
 
 
-MAX_POSITION_PCT   = 0.40   # 40% max single position
-MAX_TRADES_PER_DAY = 3      # hard cap on daily trade count
+MAX_POSITION_PCT       = 0.40   # 40% max single position
+MAX_TRADES_PER_DAY     = 3      # hard cap on daily trade count
+MAX_SUB_STRATEGY_PCT   = 0.70   # 70% max per sub-strategy (D/C/G/V/H/L/U/E)
+
+# Reverse map: ticker -> list of strategy buckets that use it
+_TICKER_TO_BUCKETS = {}
+for _bucket, _ticker in dbmod.ETF_UNIVERSE.items():
+    _TICKER_TO_BUCKETS.setdefault(_ticker, []).append(_bucket)
+
+
+def _compute_sub_strategy_weights(positions: list, prices: dict, portfolio_value: float) -> dict:
+    """Computes current weight of each sub-strategy factor (D/C/G/V/H/L/U/E) as a fraction."""
+    sub_totals = {"D": 0.0, "C": 0.0, "G": 0.0, "V": 0.0, "H": 0.0, "L": 0.0, "U": 0.0, "E": 0.0}
+    if portfolio_value <= 0:
+        return sub_totals
+    for pos in positions:
+        mv = pos["shares"] * prices.get(pos["symbol"], pos.get("current_price", 0))
+        bucket = pos.get("strategy_bucket", "")
+        axes = BUCKET_AXES.get(bucket, {})
+        weight = mv / portfolio_value
+        for axis_key in ["dc", "gv", "hl", "ue"]:
+            sub = axes.get(axis_key, "")
+            if sub in sub_totals:
+                sub_totals[sub] += weight
+    return sub_totals
+
+
+def _would_breach_sub_strategy(symbol: str, trade_value: float, positions: list,
+                                prices: dict, portfolio_value: float) -> str:
+    """Returns the breached factor name if buying this ticker would push any sub-strategy over 70%, else ''."""
+    current = _compute_sub_strategy_weights(positions, prices, portfolio_value)
+    # Find which sub-strategies this ticker contributes to
+    buckets = _TICKER_TO_BUCKETS.get(symbol, [])
+    if not buckets:
+        return ""
+    # Use the first bucket for this ticker (most positions have one bucket)
+    # But check ALL buckets this ticker maps to
+    affected_subs = set()
+    for bucket in buckets:
+        axes = BUCKET_AXES.get(bucket, {})
+        for axis_key in ["dc", "gv", "hl", "ue"]:
+            sub = axes.get(axis_key, "")
+            if sub:
+                affected_subs.add(sub)
+    add_weight = trade_value / portfolio_value if portfolio_value > 0 else 0
+    for sub in affected_subs:
+        if current.get(sub, 0) + add_weight > MAX_SUB_STRATEGY_PCT:
+            return sub
+    return ""
 
 
 def _get_current_shares(positions: list, symbol: str) -> float:
@@ -111,6 +160,17 @@ def validate_trades(
                     f"Position concentration breach: buying {shares} shares of {symbol} "
                     f"would bring position to {new_pct:.1%} of portfolio "
                     f"(limit: {MAX_POSITION_PCT:.0%})."
+                )
+                rejected.append(t)
+                _log_rejection(t)
+                continue
+
+            # Check 3: sub-strategy cap (70% per factor)
+            breached = _would_breach_sub_strategy(symbol, trade_value, positions, prices, portfolio_value)
+            if breached:
+                t["rejection_reason"] = (
+                    f"Sub-strategy cap breach: buying {symbol} would push "
+                    f"factor '{breached}' above {MAX_SUB_STRATEGY_PCT:.0%} of portfolio."
                 )
                 rejected.append(t)
                 _log_rejection(t)

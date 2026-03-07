@@ -27,112 +27,112 @@ st.set_page_config(
 BLOOMBERG_CSS = """
 <style>
 /* ── Global reset & font ── */
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap');
 
 html, body, [class*="css"], .stApp, .block-container,
 div, p, span, label, button, input, select, textarea, th, td, li {
-    font-family: 'Courier New', 'Share Tech Mono', monospace !important;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace !important;
 }
 
 /* ── Background ── */
-.stApp { background-color: #0a0a0a !important; }
-.block-container { background-color: #0a0a0a !important; padding-top: 1rem !important; }
-section[data-testid="stSidebar"] { background-color: #0d0d0d !important; border-right: 1px solid #ffb000; }
+.stApp { background-color: #131722 !important; }
+.block-container { background-color: #131722 !important; padding-top: 1rem !important; }
+section[data-testid="stSidebar"] { background-color: #0e1219 !important; border-right: 1px solid #2a3244; }
 
 /* ── Text colors ── */
-body, .stMarkdown, p, span, label, div { color: #00ff41 !important; }
-h1, h2, h3, h4, h5, h6 { color: #ffb000 !important; text-transform: uppercase; letter-spacing: 2px; }
-.stMetric label { color: #008f11 !important; font-size: 0.75rem !important; text-transform: uppercase; }
-.stMetric [data-testid="stMetricValue"] { color: #00ff41 !important; }
+body, .stMarkdown, p, span, label, div { color: #d4d4d4 !important; }
+h1, h2, h3, h4, h5, h6 { color: #ff9900 !important; text-transform: uppercase; letter-spacing: 2px; }
+.stMetric label { color: #7a8ba5 !important; font-size: 0.75rem !important; text-transform: uppercase; }
+.stMetric [data-testid="stMetricValue"] { color: #ffffff !important; }
 .stMetric [data-testid="stMetricDelta"] { font-size: 0.8rem !important; }
 
 /* ── Buttons ── */
 .stButton > button {
-    background-color: #0a0a0a !important;
-    color: #ffb000 !important;
-    border: 1px solid #ffb000 !important;
-    border-radius: 0 !important;
-    font-family: 'Courier New', monospace !important;
-    font-size: 0.8rem !important;
+    background-color: #1a2035 !important;
+    color: #ff9900 !important;
+    border: 1px solid #ff9900 !important;
+    border-radius: 2px !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.78rem !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     padding: 0.4rem 1.2rem !important;
     transition: all 0.1s ease !important;
 }
 .stButton > button:hover {
-    background-color: #ffb000 !important;
-    color: #0a0a0a !important;
+    background-color: #ff9900 !important;
+    color: #0e1219 !important;
 }
 .stButton > button:active {
-    background-color: #ff6600 !important;
-    color: #0a0a0a !important;
+    background-color: #cc7700 !important;
+    color: #0e1219 !important;
 }
 
 /* ── Tab styling ── */
 .stTabs [data-baseweb="tab-list"] {
-    background-color: #0a0a0a !important;
-    border-bottom: 1px solid #ffb000 !important;
+    background-color: #0e1219 !important;
+    border-bottom: 1px solid #ff9900 !important;
     gap: 0 !important;
 }
 .stTabs [data-baseweb="tab"] {
-    color: #008f11 !important;
-    background-color: #0a0a0a !important;
-    border: 1px solid #1a1a1a !important;
+    color: #7a8ba5 !important;
+    background-color: #0e1219 !important;
+    border: 1px solid #1e2a3a !important;
     border-radius: 0 !important;
-    font-family: 'Courier New', monospace !important;
-    font-size: 0.8rem !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.78rem !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     padding: 0.5rem 1.5rem !important;
 }
 .stTabs [aria-selected="true"] {
-    color: #ffb000 !important;
-    background-color: #0d0d0d !important;
-    border-bottom: 2px solid #ffb000 !important;
+    color: #ff9900 !important;
+    background-color: #131722 !important;
+    border-bottom: 2px solid #ff9900 !important;
 }
 
 /* ── DataFrames / Tables ── */
-.stDataFrame, .dataframe { background-color: #050505 !important; }
+.stDataFrame, .dataframe { background-color: #0e1219 !important; }
 .stDataFrame thead th {
-    background-color: #111 !important;
-    color: #ffb000 !important;
+    background-color: #1a2035 !important;
+    color: #ff9900 !important;
     font-size: 0.75rem !important;
     text-transform: uppercase !important;
-    border: 1px solid #333 !important;
+    border: 1px solid #2a3244 !important;
 }
 .stDataFrame tbody td {
-    background-color: #080808 !important;
-    color: #00ff41 !important;
-    border: 1px solid #1a1a1a !important;
+    background-color: #111827 !important;
+    color: #d4d4d4 !important;
+    border: 1px solid #1e2a3a !important;
     font-size: 0.78rem !important;
 }
 
 /* ── Input fields ── */
 .stTextInput input, .stTextArea textarea, .stSelectbox select {
-    background-color: #050505 !important;
-    color: #00ff41 !important;
-    border: 1px solid #333 !important;
-    border-radius: 0 !important;
-    font-family: 'Courier New', monospace !important;
+    background-color: #0e1219 !important;
+    color: #d4d4d4 !important;
+    border: 1px solid #2a3244 !important;
+    border-radius: 2px !important;
+    font-family: 'IBM Plex Mono', monospace !important;
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #050505; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 0; }
+::-webkit-scrollbar-track { background: #0e1219; }
+::-webkit-scrollbar-thumb { background: #2a3244; border-radius: 2px; }
 
 /* ── Success / warning / error overrides ── */
-.stAlert { border-radius: 0 !important; border-left: 3px solid #ffb000 !important; }
-div[data-testid="stNotification"] { background-color: #0d0d0d !important; }
+.stAlert { border-radius: 2px !important; border-left: 3px solid #ff9900 !important; }
+div[data-testid="stNotification"] { background-color: #0e1219 !important; }
 
 /* ── Sidebar text ── */
-section[data-testid="stSidebar"] * { color: #00ff41 !important; }
+section[data-testid="stSidebar"] * { color: #d4d4d4 !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 { color: #ffb000 !important; }
+section[data-testid="stSidebar"] h3 { color: #ff9900 !important; }
 
 /* ── Plotly chart backgrounds ── */
-.js-plotly-plot .plotly { background: #0a0a0a !important; }
+.js-plotly-plot .plotly { background: #131722 !important; }
 </style>
 """
 
@@ -248,26 +248,26 @@ def bsep(label: str = ""):
     # Renders a Bloomberg-style terminal separator line
     if label:
         st.markdown(
-            f'<div style="color:#ffb000;font-family:Courier New,monospace;'
+            f'<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
             f'font-size:0.78rem;margin:0.5rem 0;">'
             f'{"═"*4} {label.upper()} {"═"*(max(4, 60-len(label)-6))}</div>',
             unsafe_allow_html=True
         )
     else:
         st.markdown(
-            '<div style="color:#333;font-family:Courier New,monospace;'
+            '<div style="color:#2a3244;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
             'font-size:0.78rem;margin:0.4rem 0;">'
-            '{"═"*64}</div>',
+            '{"─"*64}</div>',
             unsafe_allow_html=True
         )
 
 
-def terminal_text(text: str, color: str = "#00ff41", size: str = "0.8rem"):
+def terminal_text(text: str, color: str = "#d4d4d4", size: str = "0.8rem"):
     # Renders monospace terminal-style text
     st.markdown(
-        f'<pre style="color:{color};font-family:Courier New,monospace;'
-        f'font-size:{size};background:#050505;padding:0.8rem;'
-        f'border:1px solid #1a1a1a;overflow-x:auto;">{text}</pre>',
+        f'<pre style="color:{color};font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+        f'font-size:{size};background:#0e1219;padding:0.8rem;'
+        f'border:1px solid #2a3244;overflow-x:auto;">{text}</pre>',
         unsafe_allow_html=True
     )
 
@@ -282,23 +282,24 @@ def render_terminal_table(df: pd.DataFrame, color_fns: dict = None):
         return
 
     headers = "".join(
-        f'<th style="background:#111;color:#ffb000;font-size:0.75rem;'
-        f'text-transform:uppercase;border:1px solid #333;padding:0.35rem 0.7rem;'
-        f'letter-spacing:1px;white-space:nowrap;">{col}</th>'
+        f'<th style="background:#1a2035;color:#ff9900;font-size:0.72rem;'
+        f'text-transform:uppercase;border:1px solid #2a3244;padding:0.35rem 0.7rem;'
+        f'letter-spacing:1px;white-space:nowrap;font-weight:500;">{col}</th>'
         for col in df.columns
     )
 
     rows_html = ""
-    for _, row in df.iterrows():
+    for i, (_, row) in enumerate(df.iterrows()):
+        row_bg = "#111827" if i % 2 == 0 else "#0e1219"
         cells = ""
         for col in df.columns:
             val = row[col]
-            color = "#00ff41"
+            color = "#d4d4d4"
             if color_fns and col in color_fns:
                 color = color_fns[col](val)
             cells += (
-                f'<td style="background:#080808;color:{color};font-size:0.78rem;'
-                f'border:1px solid #1a1a1a;padding:0.3rem 0.7rem;white-space:nowrap;">'
+                f'<td style="background:{row_bg};color:{color};font-size:0.78rem;'
+                f'border:1px solid #1e2a3a;padding:0.3rem 0.7rem;white-space:nowrap;">'
                 f'{val}</td>'
             )
         rows_html += f"<tr>{cells}</tr>"
@@ -306,7 +307,7 @@ def render_terminal_table(df: pd.DataFrame, color_fns: dict = None):
     html = (
         '<div style="overflow-x:auto;margin:0.4rem 0;">'
         '<table style="width:100%;border-collapse:collapse;'
-        "font-family:'Courier New',monospace;\">"
+        "font-family:'IBM Plex Mono','Courier New',monospace;\">"
         f'<thead><tr>{headers}</tr></thead>'
         f'<tbody>{rows_html}</tbody>'
         '</table></div>'
@@ -317,23 +318,23 @@ def render_terminal_table(df: pd.DataFrame, color_fns: dict = None):
 def _pnl_color(val):
     try:
         num = float(str(val).replace("+", "").replace("%", "").replace("$", "").replace(",", ""))
-        return "#00ff41" if num >= 0 else "#ff3333"
+        return "#4caf50" if num >= 0 else "#f44336"
     except Exception:
-        return "#00ff41"
+        return "#d4d4d4"
 
 
 def _trend_color(val):
     v = str(val).lower()
-    if v == "rising":  return "#00ff41"
-    if v == "falling": return "#ff3333"
-    return "#ffb000"
+    if v == "rising":  return "#4caf50"
+    if v == "falling": return "#f44336"
+    return "#ff9900"
 
 
 def _action_color(val):
     v = str(val).upper()
-    if v in ("BUY", "INIT_BUY"):  return "#00ff41"
-    if v == "SELL":                return "#ff3333"
-    return "#ffb000"
+    if v in ("BUY", "INIT_BUY"):  return "#4caf50"
+    if v == "SELL":                return "#f44336"
+    return "#ff9900"
 
 
 # ─── TOP TICKER TAPE ──────────────────────────────────────────────────────────
@@ -346,47 +347,49 @@ def render_ticker_tape():
     dpct = pf["daily_pnl_pct"]
     tret = pf["total_return_pct"]
 
-    dpnl_color = "#00ff41" if dpnl >= 0 else "#ff3333"
-    tret_color = "#00ff41" if tret >= 0 else "#ff3333"
+    dpnl_color = "#4caf50" if dpnl >= 0 else "#f44336"
+    tret_color = "#4caf50" if tret >= 0 else "#f44336"
     dpnl_sign  = "+" if dpnl >= 0 else ""
     tret_sign  = "+" if tret >= 0 else ""
 
     tape_html = f"""
     <div style="
-        background:#050505;
-        border:1px solid #ffb000;
-        border-radius:0;
-        padding:0.5rem 1.5rem;
+        background:#0e1219;
+        border:1px solid #2a3244;
+        border-left:3px solid #ff9900;
+        border-radius:2px;
+        padding:0.6rem 1.5rem;
         margin-bottom:1rem;
-        font-family:'Courier New',monospace;
+        font-family:'IBM Plex Mono','Courier New',monospace;
         font-size:0.82rem;
         display:flex;
         flex-wrap:wrap;
         gap:2rem;
         align-items:center;
     ">
-        <span style="color:#ffb000;font-weight:bold;letter-spacing:1px;">
-            ╔══ PAPER TRADING TERMINAL ══╗
+        <span style="color:#ff9900;font-weight:500;letter-spacing:2px;font-size:0.85rem;">
+            PAPER TRADING TERMINAL
+        </span>
+        <span style="color:#2a3244;">|</span>
+        <span>
+            <span style="color:#7a8ba5;">PORTFOLIO</span>
+            <span style="color:#ffffff;"> ${tv:,.2f}</span>
         </span>
         <span>
-            <span style="color:#008f11;">PORTFOLIO:</span>
-            <span style="color:#00ff41;"> ${tv:,.2f}</span>
+            <span style="color:#7a8ba5;">CASH</span>
+            <span style="color:#d4d4d4;"> ${cash:,.2f}</span>
         </span>
         <span>
-            <span style="color:#008f11;">CASH:</span>
-            <span style="color:#00d4ff;"> ${cash:,.2f}</span>
-        </span>
-        <span>
-            <span style="color:#008f11;">DAILY P&L:</span>
+            <span style="color:#7a8ba5;">DAILY P&L</span>
             <span style="color:{dpnl_color};"> {dpnl_sign}${dpnl:,.2f} ({dpnl_sign}{dpct:.2f}%)</span>
         </span>
         <span>
-            <span style="color:#008f11;">TOTAL RETURN:</span>
+            <span style="color:#7a8ba5;">TOTAL RETURN</span>
             <span style="color:{tret_color};"> {tret_sign}{tret:.2f}%</span>
         </span>
         <span>
-            <span style="color:#008f11;">SIM DATE:</span>
-            <span style="color:#ffb000;"> {st.session_state.current_date}</span>
+            <span style="color:#7a8ba5;">SIM DATE</span>
+            <span style="color:#ff9900;"> {st.session_state.current_date}</span>
         </span>
     </div>
     """
@@ -397,19 +400,26 @@ def render_ticker_tape():
 def render_sidebar():
     # Renders the command panel sidebar with controls and status indicators
     with st.sidebar:
+        # ── LOGO — drop logo.png into the project folder to display it ──
+        import os
+        _logo_path = os.path.join(os.path.dirname(__file__), "logo.png")
+        if os.path.exists(_logo_path):
+            st.image(_logo_path, use_container_width=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+
         st.markdown(
-            '<div style="color:#ffb000;font-family:Courier New,monospace;'
-            'font-size:1rem;font-weight:bold;letter-spacing:2px;border-bottom:'
-            '1px solid #ffb000;padding-bottom:0.5rem;margin-bottom:1rem;">'
-            '[ COMMAND PANEL ]</div>',
+            '<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.85rem;font-weight:500;letter-spacing:2px;border-bottom:'
+            '1px solid #2a3244;padding-bottom:0.5rem;margin-bottom:1rem;text-transform:uppercase;">'
+            'Command Panel</div>',
             unsafe_allow_html=True
         )
 
         # Simulation date display
         st.markdown(
-            f'<div style="color:#ffb000;font-family:Courier New,monospace;'
-            f'font-size:0.85rem;margin-bottom:0.8rem;">'
-            f'SIM DATE: <span style="color:#00d4ff;">{st.session_state.current_date}</span></div>',
+            f'<div style="color:#7a8ba5;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            f'font-size:0.8rem;margin-bottom:0.8rem;">'
+            f'SIM DATE <span style="color:#ff9900;">{st.session_state.current_date}</span></div>',
             unsafe_allow_html=True
         )
 
@@ -422,7 +432,7 @@ def render_sidebar():
         # ── CONFIRM MACRO ── (shown only after phase 1 complete, before phase 2)
         if st.session_state.macro_phase1_done and not st.session_state.macro_confirmed:
             st.markdown(
-                '<div style="color:#ff6600;font-family:Courier New,monospace;'
+                '<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
                 'font-size:0.75rem;margin-top:0.5rem;">'
                 '⚠ REVIEW MACRO ANALYSIS IN TAB 4<br>THEN CONFIRM BELOW</div>',
                 unsafe_allow_html=True
@@ -451,23 +461,36 @@ def render_sidebar():
         if st.session_state.approved_trades:
             n = len(st.session_state.approved_trades)
             st.markdown(
-                f'<div style="color:#ffb000;font-family:Courier New,monospace;'
+                f'<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
                 f'font-size:0.75rem;">{n} APPROVED TRADE(S) PENDING</div>',
                 unsafe_allow_html=True
             )
             if st.button("[ EXECUTE TRADES ]", key="btn_execute", use_container_width=True):
                 _handle_execute_trades()
 
+        # ── RUN N DAYS ──
+        st.markdown(
+            '<div style="color:#7a8ba5;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.72rem;letter-spacing:1px;margin:0.5rem 0 0.3rem;">AUTO-RUN N DAYS</div>',
+            unsafe_allow_html=True
+        )
+        n_days = st.number_input(
+            "Days", min_value=1, max_value=60, value=5, step=1,
+            key="n_days_input", label_visibility="collapsed"
+        )
+        if st.button("[ RUN N DAYS ]", key="btn_run_n", use_container_width=True):
+            _handle_run_n_days(n_days)
+
         st.markdown("---")
 
         # ── STATUS ──
-        status_color = "#00ff41" if st.session_state.sim_started else "#ff6600"
+        status_color = "#4caf50" if st.session_state.sim_started else "#ff9900"
         status_label = "LIVE" if st.session_state.sim_started else "OFFLINE"
         last_run = st.session_state.last_run_time or "—"
         st.markdown(
-            f'<div style="font-family:Courier New,monospace;font-size:0.75rem;">'
-            f'STATUS: <span style="color:{status_color};">● {status_label}</span><br>'
-            f'LAST RUN: <span style="color:#008f11;">{last_run}</span>'
+            f'<div style="font-family:\'IBM Plex Mono\',\'Courier New\',monospace;font-size:0.75rem;color:#7a8ba5;">'
+            f'STATUS <span style="color:{status_color};">● {status_label}</span><br>'
+            f'LAST RUN <span style="color:#d4d4d4;">{last_run}</span>'
             f'</div>',
             unsafe_allow_html=True
         )
@@ -619,10 +642,88 @@ def _handle_reset():
     st.rerun()
 
 
+def _handle_run_n_days(n: int):
+    # Runs the full Advance Day → Run Agents → Execute Trades loop N times
+    if not st.session_state.sim_started:
+        st.warning("INITIALIZE PORTFOLIO FIRST")
+        return
+
+    progress_bar      = st.progress(0)
+    status_placeholder = st.empty()
+
+    for i in range(n):
+        # ── Step 1: Advance day ──
+        current  = datetime.strptime(st.session_state.current_date, "%Y-%m-%d")
+        next_day = current + timedelta(days=1)
+        while next_day.weekday() >= 5:
+            next_day += timedelta(days=1)
+        st.session_state.current_date = next_day.strftime("%Y-%m-%d")
+
+        status_placeholder.info(f"DAY {i+1}/{n} — {st.session_state.current_date}  (fetching prices...)")
+        try:
+            prices = data_utils.get_all_current_prices(st.session_state.current_date)
+            st.session_state.prices = prices
+            if prices:
+                execution_agent.refresh_position_prices(prices)
+        except Exception as e:
+            st.error(f"PRICE FETCH ERROR on {st.session_state.current_date}: {e}")
+            break
+
+        # ── Step 2: Run agents ──
+        status_placeholder.info(f"DAY {i+1}/{n} — {st.session_state.current_date}  (running agents...)")
+        try:
+            positions = db.get_positions()
+            state     = db.get_simulation_state()
+            cash      = state["cash_balance"]          if state else db.INITIAL_CASH
+            pf_value  = state["total_portfolio_value"] if state else db.INITIAL_CASH
+
+            proposed          = tactical_agent.propose_trades(
+                st.session_state.current_date, positions, prices, pf_value
+            )
+            approved, rejected = risk_agent.validate_trades(proposed, positions, cash, pf_value, prices)
+            st.session_state.proposed_trades = proposed
+            st.session_state.approved_trades = approved
+            st.session_state.rejected_trades = rejected
+        except Exception as e:
+            st.error(f"AGENT ERROR on {st.session_state.current_date}: {e}")
+            break
+
+        # ── Step 3: Execute trades ──
+        status_placeholder.info(f"DAY {i+1}/{n} — {st.session_state.current_date}  (executing trades...)")
+        try:
+            positions = db.get_positions()
+            state     = db.get_simulation_state()
+            cash      = state["cash_balance"] if state else db.INITIAL_CASH
+
+            result = execution_agent.execute_trades(
+                approved,
+                st.session_state.current_date,
+                prices,
+                cash,
+                positions,
+            )
+            updated_positions = db.get_positions()
+            execution_agent.save_daily_snapshot(
+                st.session_state.current_date, result["new_cash"], updated_positions, prices
+            )
+            st.session_state.agent_log       = result["execution_log"]
+            st.session_state.approved_trades = []
+            st.session_state.proposed_trades = []
+        except Exception as e:
+            st.error(f"EXECUTION ERROR on {st.session_state.current_date}: {e}")
+            break
+
+        progress_bar.progress((i + 1) / n)
+
+    st.session_state.last_run_time = datetime.now().strftime("%H:%M:%S")
+    status_placeholder.success(f"COMPLETED {n} DAY(S) — NOW AT {st.session_state.current_date}")
+    st.rerun()
+
+
 # ─── TAB 1: TRADING FLOOR ─────────────────────────────────────────────────────
 def render_trading_floor():
     st.markdown(
-        '<h3 style="color:#ffb000;letter-spacing:3px;">[ TRADING FLOOR ]</h3>',
+        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ TRADING FLOOR ]</h3>',
         unsafe_allow_html=True
     )
 
@@ -630,20 +731,20 @@ def render_trading_floor():
 
     with col1:
         st.markdown(
-            '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
             '═══ MACRO REGIME ═══</div>',
             unsafe_allow_html=True
         )
         result = st.session_state.get("macro_full_result") or st.session_state.get("macro_phase1_result")
         if result:
             narrative = result.get("regime_narrative", "—")
-            terminal_text(narrative, color="#00d4ff")
+            terminal_text(narrative, color="#d4d4d4")
         else:
             terminal_text("NO MACRO DATA — RUN [ INIT PORTFOLIO ]", color="#555")
 
     with col2:
         st.markdown(
-            '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
             '═══ PROPOSED TRADES ═══</div>',
             unsafe_allow_html=True
         )
@@ -655,38 +756,72 @@ def render_trading_floor():
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(
-        '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
         '═══ AGENT REASONING LOG ═══</div>',
         unsafe_allow_html=True
     )
 
-    # Combine approved + rejected into one log
-    log_lines = []
+    # ── APPROVED TRADES ──
     if st.session_state.approved_trades:
-        log_lines.append("APPROVED TRADES:")
-        for t in st.session_state.approved_trades:
-            log_lines.append(
-                f"  ✓ {t.get('action','?'):4s} {t.get('symbol','?'):6s} "
-                f"{t.get('shares',0):8.2f} sh  | {t.get('reason','')}"
-            )
-    if st.session_state.rejected_trades:
-        log_lines.append("\nREJECTED TRADES:")
-        for t in st.session_state.rejected_trades:
-            log_lines.append(
-                f"  ✗ {t.get('action','?'):4s} {t.get('symbol','?'):6s} "
-                f"| {t.get('rejection_reason','')}"
-            )
-    if st.session_state.agent_log:
-        log_lines.append("\n" + st.session_state.agent_log)
+        st.markdown(
+            '<div style="color:#4caf50;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.72rem;letter-spacing:1px;font-weight:500;margin-bottom:0.3rem;">'
+            '▶ APPROVED TRADES</div>',
+            unsafe_allow_html=True,
+        )
+        approved_rows = [
+            {
+                "ACTION": t.get("action", "?").upper(),
+                "TICKER": t.get("symbol", "?"),
+                "SHARES": f"{t.get('shares', 0):,.2f}",
+                "REASON": t.get("reason", ""),
+            }
+            for t in st.session_state.approved_trades
+        ]
+        render_terminal_table(pd.DataFrame(approved_rows), color_fns={"ACTION": _action_color})
 
-    log_text = "\n".join(log_lines) if log_lines else "NO LOG ENTRIES"
-    terminal_text(log_text)
+    # ── REJECTED TRADES ──
+    if st.session_state.rejected_trades:
+        st.markdown(
+            '<div style="color:#f44336;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.72rem;letter-spacing:1px;font-weight:500;margin:0.6rem 0 0.3rem;">'
+            '✕ REJECTED TRADES</div>',
+            unsafe_allow_html=True,
+        )
+        rejected_rows = [
+            {
+                "ACTION": t.get("action", "?").upper(),
+                "TICKER": t.get("symbol", "?"),
+                "REASON": t.get("rejection_reason", ""),
+            }
+            for t in st.session_state.rejected_trades
+        ]
+        render_terminal_table(
+            pd.DataFrame(rejected_rows),
+            color_fns={"ACTION": lambda _: "#f44336"},
+        )
+
+    # ── EXECUTION LOG ──
+    if st.session_state.agent_log:
+        st.markdown(
+            '<div style="color:#7a8ba5;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.72rem;letter-spacing:1px;font-weight:500;margin:0.6rem 0 0.3rem;">'
+            '■ EXECUTION LOG</div>',
+            unsafe_allow_html=True,
+        )
+        terminal_text(st.session_state.agent_log)
+
+    # ── Fallback when nothing to show ──
+    if (not st.session_state.approved_trades
+            and not st.session_state.rejected_trades
+            and not st.session_state.agent_log):
+        terminal_text("NO LOG ENTRIES — RUN [ ADVANCE DAY ] → [ RUN AGENTS ] → [ EXECUTE TRADES ]", color="#555")
 
 
 # ─── TAB 2: PORTFOLIO ─────────────────────────────────────────────────────────
 def render_portfolio():
     st.markdown(
-        '<h3 style="color:#ffb000;letter-spacing:3px;">[ PORTFOLIO HOLDINGS ]</h3>',
+        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ PORTFOLIO HOLDINGS ]</h3>',
         unsafe_allow_html=True
     )
     positions = db.get_positions()
@@ -733,15 +868,15 @@ def render_portfolio():
     # Portfolio totals
     total_pnl = total_mv - total_cost
     total_pnl_pct = (total_pnl / total_cost * 100) if total_cost > 0 else 0.0
-    pnl_color = "#00ff41" if total_pnl >= 0 else "#ff3333"
+    pnl_color = "#4caf50" if total_pnl >= 0 else "#f44336"
 
     st.markdown(
-        f'<div style="font-family:Courier New,monospace;font-size:0.8rem;'
-        f'border-top:1px solid #333;padding-top:0.5rem;margin-top:0.5rem;">'
-        f'<span style="color:#ffb000;">TOTAL HOLDINGS:</span> '
-        f'<span style="color:#00ff41;">${total_mv:,.2f}</span>'
+        f'<div style="font-family:\'IBM Plex Mono\',\'Courier New\',monospace;font-size:0.8rem;'
+        f'border-top:1px solid #2a3244;padding-top:0.5rem;margin-top:0.5rem;color:#7a8ba5;">'
+        f'<span style="color:#ff9900;">TOTAL HOLDINGS</span> '
+        f'<span style="color:#ffffff;">${total_mv:,.2f}</span>'
         f' &nbsp;|&nbsp; '
-        f'<span style="color:#ffb000;">TOTAL P&L:</span> '
+        f'<span style="color:#ff9900;">TOTAL P&L</span> '
         f'<span style="color:{pnl_color};">'
         f'{"+" if total_pnl>=0 else ""}${total_pnl:,.2f} '
         f'({"+" if total_pnl_pct>=0 else ""}{total_pnl_pct:.2f}%)'
@@ -749,10 +884,68 @@ def render_portfolio():
         unsafe_allow_html=True
     )
 
+    # ── Portfolio Treemap Heatmap ──
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(
+        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
+        '═══ POSITION HEATMAP ═══</div>',
+        unsafe_allow_html=True
+    )
+    tree_labels = []
+    tree_parents = []
+    tree_values = []
+    tree_colors = []
+    tree_text = []
+    for r in rows:
+        ticker = r["TICKER"]
+        mv = float(r["MKT VALUE"].replace("$", "").replace(",", ""))
+        pnl_pct = float(r["P&L%"].replace("+", "").replace("%", ""))
+        tree_labels.append(f"{ticker}<br>{r['P&L%']}")
+        tree_parents.append("")
+        tree_values.append(mv)
+        tree_colors.append(pnl_pct)
+        tree_text.append(f"{ticker} | {r['MKT VALUE']} | P&L: {r['P&L%']}")
+
+    if tree_values:
+        fig_tree = go.Figure(go.Treemap(
+            labels=tree_labels,
+            parents=tree_parents,
+            values=tree_values,
+            marker=dict(
+                colors=tree_colors,
+                colorscale=[
+                    [0.0, "#b71c1c"], [0.25, "#f44336"], [0.45, "#424242"],
+                    [0.55, "#424242"], [0.75, "#4caf50"], [1.0, "#1b5e20"],
+                ],
+                cmid=0,
+                colorbar=dict(
+                    title=dict(text="P&L %", font=dict(color="#d4d4d4")),
+                    tickfont=dict(color="#d4d4d4"),
+                    ticksuffix="%",
+                    bgcolor="#131722",
+                    bordercolor="#2a3244",
+                ),
+                line=dict(color="#131722", width=2),
+            ),
+            text=tree_text,
+            textfont=dict(family="IBM Plex Mono", size=12),
+            textinfo="label",
+            hovertemplate="%{text}<extra></extra>",
+        ))
+        fig_tree.update_layout(
+            title=dict(text="HOLDINGS HEATMAP — SIZE = WEIGHT, COLOR = P&L",
+                       font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#131722",
+            font=dict(color="#ffffff", family="IBM Plex Mono"),
+            height=420,
+            margin=dict(l=10, r=10, t=40, b=10),
+        )
+        st.plotly_chart(fig_tree, use_container_width=True)
+
     # Recent transactions
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(
-        '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
         '═══ RECENT TRANSACTIONS ═══</div>',
         unsafe_allow_html=True
     )
@@ -770,7 +963,7 @@ def render_portfolio():
 # ─── TAB 3: PERFORMANCE ───────────────────────────────────────────────────────
 def render_performance():
     st.markdown(
-        '<h3 style="color:#ffb000;letter-spacing:3px;">[ PERFORMANCE ANALYTICS ]</h3>',
+        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ PERFORMANCE ANALYTICS ]</h3>',
         unsafe_allow_html=True
     )
     snapshots = db.get_daily_snapshots()
@@ -782,6 +975,20 @@ def render_performance():
     df_snap = pd.DataFrame(snapshots)
     df_snap["date"] = pd.to_datetime(df_snap["date"])
     initial_equity  = df_snap["total_equity"].iloc[0]
+
+    # Warn when all snapshots are identical (happens when running future-date
+    # simulation before real market data exists for those dates)
+    if df_snap["total_equity"].std() < 1.0:
+        st.markdown(
+            '<div style="background:#1a1a00;border:1px solid #ff9900;border-left:3px solid #ff9900;'
+            'border-radius:2px;padding:0.6rem 1rem;margin-bottom:0.8rem;font-family:\'IBM Plex Mono\','
+            '\'Courier New\',monospace;font-size:0.75rem;color:#ff9900;">'
+            'NOTE: Portfolio equity is flat. This is expected when simulation dates have advanced '
+            'beyond the last available market close — yfinance returns the most recent known price '
+            'for all future dates. P&amp;L will populate once real trading days with new closes are reached.'
+            '</div>',
+            unsafe_allow_html=True,
+        )
 
     # ── KPI Cards ──
     final_equity   = df_snap["total_equity"].iloc[-1]
@@ -795,38 +1002,38 @@ def render_performance():
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        ret_color = "#00ff41" if total_return >= 0 else "#ff3333"
+        ret_color = "#4caf50" if total_return >= 0 else "#f44336"
         st.markdown(
-            f'<div style="background:#0d0d0d;border:1px solid #333;padding:1rem;text-align:center;">'
-            f'<div style="color:#008f11;font-size:0.7rem;">TOTAL RETURN</div>'
-            f'<div style="color:{ret_color};font-size:1.3rem;font-weight:bold;">'
+            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
+            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">TOTAL RETURN</div>'
+            f'<div style="color:{ret_color};font-size:1.3rem;font-weight:500;">'
             f'{"+"if total_return>=0 else ""}{total_return:.2f}%</div></div>',
             unsafe_allow_html=True
         )
     with c2:
-        dd_color = "#ff3333" if max_drawdown < -5 else "#ffb000"
+        dd_color = "#f44336" if max_drawdown < -5 else "#ff9900"
         st.markdown(
-            f'<div style="background:#0d0d0d;border:1px solid #333;padding:1rem;text-align:center;">'
-            f'<div style="color:#008f11;font-size:0.7rem;">MAX DRAWDOWN</div>'
-            f'<div style="color:{dd_color};font-size:1.3rem;font-weight:bold;">'
+            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
+            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">MAX DRAWDOWN</div>'
+            f'<div style="color:{dd_color};font-size:1.3rem;font-weight:500;">'
             f'{max_drawdown:.2f}%</div></div>',
             unsafe_allow_html=True
         )
     with c3:
-        sh_color = "#00ff41" if sharpe > 1 else ("#ffb000" if sharpe > 0 else "#ff3333")
+        sh_color = "#4caf50" if sharpe > 1 else ("#ff9900" if sharpe > 0 else "#f44336")
         st.markdown(
-            f'<div style="background:#0d0d0d;border:1px solid #333;padding:1rem;text-align:center;">'
-            f'<div style="color:#008f11;font-size:0.7rem;">SHARPE RATIO</div>'
-            f'<div style="color:{sh_color};font-size:1.3rem;font-weight:bold;">'
+            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
+            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">SHARPE RATIO</div>'
+            f'<div style="color:{sh_color};font-size:1.3rem;font-weight:500;">'
             f'{sharpe:.2f}</div></div>',
             unsafe_allow_html=True
         )
     with c4:
-        wr_color = "#00ff41" if win_rate > 50 else "#ff3333"
+        wr_color = "#4caf50" if win_rate > 50 else "#f44336"
         st.markdown(
-            f'<div style="background:#0d0d0d;border:1px solid #333;padding:1rem;text-align:center;">'
-            f'<div style="color:#008f11;font-size:0.7rem;">WIN RATE</div>'
-            f'<div style="color:{wr_color};font-size:1.3rem;font-weight:bold;">'
+            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
+            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">WIN RATE</div>'
+            f'<div style="color:{wr_color};font-size:1.3rem;font-weight:500;">'
             f'{win_rate:.1f}%</div></div>',
             unsafe_allow_html=True
         )
@@ -840,26 +1047,24 @@ def render_performance():
         y=df_snap["total_equity"],
         mode="lines",
         name="Portfolio Equity",
-        line=dict(color="#00ff41", width=2),
-        fill="tozeroy",
-        fillcolor="rgba(0,255,65,0.05)",
+        line=dict(color="#4caf50", width=2),
     ))
     fig.add_trace(go.Scatter(
         x=df_snap["date"],
         y=[initial_equity] * len(df_snap),
         mode="lines",
         name="Initial Capital",
-        line=dict(color="#ffb000", width=1, dash="dot"),
+        line=dict(color="#ff9900", width=1, dash="dot"),
     ))
     fig.update_layout(
-        title=dict(text="EQUITY CURVE", font=dict(color="#ffb000", family="Courier New", size=14)),
-        paper_bgcolor="#050505",
-        plot_bgcolor="#050505",
-        font=dict(color="#00ff41", family="Courier New"),
-        xaxis=dict(gridcolor="#1a1a1a", color="#008f11", showgrid=True),
-        yaxis=dict(gridcolor="#1a1a1a", color="#008f11", showgrid=True,
-                   tickformat="$,.0f"),
-        legend=dict(bgcolor="#050505", bordercolor="#333", font=dict(color="#00ff41")),
+        title=dict(text="EQUITY CURVE", font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+        paper_bgcolor="#131722",
+        plot_bgcolor="#0e1219",
+        font=dict(color="#d4d4d4", family="IBM Plex Mono"),
+        xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", showgrid=True),
+        yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", showgrid=True,
+                   tickformat="$,.0f", autorange=True, rangemode="normal"),
+        legend=dict(bgcolor="#0e1219", bordercolor="#2a3244", font=dict(color="#d4d4d4")),
         height=400,
         margin=dict(l=20, r=20, t=40, b=20),
     )
@@ -877,20 +1082,76 @@ def render_performance():
         fillcolor="rgba(255,51,51,0.08)",
     ))
     fig2.update_layout(
-        title=dict(text="DRAWDOWN (%)", font=dict(color="#ffb000", family="Courier New", size=14)),
-        paper_bgcolor="#050505",
-        plot_bgcolor="#050505",
-        font=dict(color="#00ff41", family="Courier New"),
-        xaxis=dict(gridcolor="#1a1a1a", color="#008f11"),
-        yaxis=dict(gridcolor="#1a1a1a", color="#008f11", tickformat=".2f"),
+        title=dict(text="DRAWDOWN (%)", font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+        paper_bgcolor="#131722",
+        plot_bgcolor="#0e1219",
+        font=dict(color="#d4d4d4", family="IBM Plex Mono"),
+        xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5"),
+        yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", tickformat=".2f"),
         height=250,
         margin=dict(l=20, r=20, t=40, b=20),
     )
     st.plotly_chart(fig2, use_container_width=True)
 
+    # ── ETF Correlation Matrix (FX-matrix style) ──
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(
+        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
+        '═══ ETF CORRELATION MATRIX ═══</div>',
+        unsafe_allow_html=True
+    )
+    try:
+        sim_date = st.session_state.current_date
+        price_hist = data_utils.get_price_history_with_warmup(sim_date)
+        if not price_hist.empty and len(price_hist) >= 5:
+            returns = price_hist.pct_change().dropna()
+            # Only keep tickers we hold
+            held_tickers = [p["symbol"] for p in db.get_positions()]
+            avail = [t for t in held_tickers if t in returns.columns]
+            if len(avail) >= 2:
+                corr = returns[avail].corr()
+                fig_corr = go.Figure(data=go.Heatmap(
+                    z=corr.values,
+                    x=corr.columns.tolist(),
+                    y=corr.index.tolist(),
+                    colorscale=[
+                        [0.0, "#b71c1c"], [0.25, "#f44336"],
+                        [0.5, "#1a1a2e"],
+                        [0.75, "#4caf50"], [1.0, "#1b5e20"],
+                    ],
+                    zmin=-1, zmax=1,
+                    text=corr.values.round(2),
+                    texttemplate="%{text}",
+                    textfont=dict(size=10, color="#ffffff", family="IBM Plex Mono"),
+                    colorbar=dict(
+                        title=dict(text="Corr", font=dict(color="#d4d4d4")),
+                        tickfont=dict(color="#d4d4d4"),
+                        bgcolor="#131722", bordercolor="#2a3244",
+                    ),
+                    hovertemplate="%{x} vs %{y}: %{z:.3f}<extra></extra>",
+                ))
+                fig_corr.update_layout(
+                    title=dict(text="RETURN CORRELATION MATRIX",
+                               font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+                    paper_bgcolor="#131722",
+                    plot_bgcolor="#0e1219",
+                    font=dict(color="#d4d4d4", family="IBM Plex Mono"),
+                    xaxis=dict(color="#7a8ba5", tickangle=-45),
+                    yaxis=dict(color="#7a8ba5", autorange="reversed"),
+                    height=500,
+                    margin=dict(l=20, r=20, t=40, b=20),
+                )
+                st.plotly_chart(fig_corr, use_container_width=True)
+            else:
+                terminal_text("INSUFFICIENT HELD TICKERS FOR CORRELATION MATRIX", color="#555")
+        else:
+            terminal_text("INSUFFICIENT PRICE HISTORY FOR CORRELATION MATRIX", color="#555")
+    except Exception as e:
+        terminal_text(f"CORRELATION MATRIX ERROR: {e}", color="#f44336")
+
     # ── Daily snapshots table ──
     st.markdown(
-        '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
         '═══ DAILY SNAPSHOTS ═══</div>',
         unsafe_allow_html=True
     )
@@ -906,9 +1167,107 @@ def render_performance():
 # ─── TAB 4: MACRO DASHBOARD ───────────────────────────────────────────────────
 def render_macro_dashboard():
     st.markdown(
-        '<h3 style="color:#ffb000;letter-spacing:3px;">[ MACRO DASHBOARD ]</h3>',
+        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ MACRO DASHBOARD ]</h3>',
         unsafe_allow_html=True
     )
+
+    # ── Factor Drift: Target vs Actual ──
+    positions = db.get_positions()
+    target_alloc = db.get_target_allocation()
+    if positions and target_alloc:
+        prices = st.session_state.prices or {}
+        total_mv = sum(p["shares"] * prices.get(p["symbol"], p.get("current_price", 0)) for p in positions) or 1
+
+        # Compute actual sub-strategy weights from positions
+        actual_sub = {"D": 0, "C": 0, "G": 0, "V": 0, "H": 0, "L": 0, "U": 0, "E": 0}
+        for pos in positions:
+            mv = pos["shares"] * prices.get(pos["symbol"], pos.get("current_price", 0))
+            axes = macro_agent.BUCKET_AXES.get(pos["strategy_bucket"], {})
+            w = mv / total_mv * 100
+            for axis_key in ["dc", "gv", "hl", "ue"]:
+                sub = axes.get(axis_key, "")
+                if sub in actual_sub:
+                    actual_sub[sub] += w
+
+        # Compute target sub-strategy weights
+        target_sub = {"D": 0, "C": 0, "G": 0, "V": 0, "H": 0, "L": 0, "U": 0, "E": 0}
+        for row in target_alloc:
+            axes = macro_agent.BUCKET_AXES.get(row["strategy_bucket"], {})
+            w = row["weight_pct"]
+            for axis_key in ["dc", "gv", "hl", "ue"]:
+                sub = axes.get(axis_key, "")
+                if sub in target_sub:
+                    target_sub[sub] += w
+
+        factor_names = {
+            "D": "Defensive", "C": "Cyclical", "G": "Growth", "V": "Value",
+            "H": "Hi-Beta", "L": "Lo-Beta", "U": "US", "E": "EM"
+        }
+        factors = list(factor_names.keys())
+        target_vals = [target_sub[f] for f in factors]
+        actual_vals = [actual_sub[f] for f in factors]
+        st.markdown(
+            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
+            '═══ FACTOR DRIFT: TARGET vs ACTUAL ═══</div>',
+            unsafe_allow_html=True
+        )
+
+        # Grouped bar chart: target vs actual
+        fig_drift = go.Figure()
+        fig_drift.add_trace(go.Bar(
+            name="Target",
+            x=[factor_names[f] for f in factors],
+            y=target_vals,
+            marker_color="#2a3244",
+            marker_line=dict(color="#ff9900", width=1),
+            text=[f"{v:.1f}%" for v in target_vals],
+            textposition="outside",
+            textfont=dict(color="#ff9900", size=10, family="IBM Plex Mono"),
+        ))
+        fig_drift.add_trace(go.Bar(
+            name="Actual",
+            x=[factor_names[f] for f in factors],
+            y=actual_vals,
+            marker_color=["#4caf50" if a >= t else "#f44336" for a, t in zip(actual_vals, target_vals)],
+            text=[f"{v:.1f}%" for v in actual_vals],
+            textposition="outside",
+            textfont=dict(color="#ffffff", size=10, family="IBM Plex Mono"),
+        ))
+        fig_drift.add_hline(y=70, line_dash="dot", line_color="#ffffff",
+                            annotation_text="70% CAP", annotation_font_color="#ffffff",
+                            annotation_font_size=10)
+        fig_drift.update_layout(
+            barmode="group",
+            title=dict(text="FACTOR ALLOCATION: TARGET vs ACTUAL",
+                       font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#131722",
+            plot_bgcolor="#0e1219",
+            font=dict(color="#d4d4d4", family="IBM Plex Mono"),
+            xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5"),
+            yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", ticksuffix="%", range=[0, 100]),
+            legend=dict(bgcolor="#0e1219", bordercolor="#2a3244", font=dict(color="#d4d4d4", size=9)),
+            height=380,
+            margin=dict(l=20, r=20, t=40, b=20),
+        )
+        st.plotly_chart(fig_drift, use_container_width=True)
+
+        # Delta summary cards
+        delta_html = '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;">'
+        for f in factors:
+            d = actual_sub[f] - target_sub[f]
+            arrow = "+" if d >= 0 else ""
+            color = "#4caf50" if abs(d) < 3 else ("#ffa726" if abs(d) < 7 else "#f44336")
+            delta_html += (
+                f'<div style="background:#0e1219;border:1px solid {color};border-radius:3px;'
+                f'padding:6px 12px;text-align:center;min-width:80px;">'
+                f'<div style="color:#7a8ba5;font-size:0.65rem;letter-spacing:1px;">{factor_names[f].upper()}</div>'
+                f'<div style="color:{color};font-size:1rem;font-weight:500;">{arrow}{d:.1f}%</div>'
+                f'</div>'
+            )
+        delta_html += '</div>'
+        st.markdown(delta_html, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
 
     result = st.session_state.get("macro_full_result") or st.session_state.get("macro_phase1_result")
 
@@ -921,7 +1280,7 @@ def render_macro_dashboard():
 
     # ── Macro Summary Table ──
     st.markdown(
-        '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
         '═══ FRED MACRO INDICATORS ═══</div>',
         unsafe_allow_html=True
     )
@@ -936,17 +1295,17 @@ def render_macro_dashboard():
     narrative = result.get("regime_narrative", "")
     if narrative:
         st.markdown(
-            '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;">'
+            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
             '═══ MACRO REGIME NARRATIVE ═══</div>',
             unsafe_allow_html=True
         )
-        terminal_text(narrative, color="#00d4ff")
+        terminal_text(narrative, color="#d4d4d4")
 
     # ── Axis Scoring (Phase 2) ──
     axis_scores = result.get("axis_scores", {})
     if axis_scores:
         st.markdown(
-            '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;margin-top:1rem;">'
+            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;margin-top:1rem;">'
             '═══ AXIS SCORING BREAKDOWN ═══</div>',
             unsafe_allow_html=True
         )
@@ -967,7 +1326,7 @@ def render_macro_dashboard():
 
     if allocation:
         st.markdown(
-            '<div style="color:#ffb000;font-size:0.78rem;letter-spacing:2px;margin-top:1rem;">'
+            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;margin-top:1rem;">'
             '═══ STRATEGIC ALLOCATION ═══</div>',
             unsafe_allow_html=True
         )
@@ -977,8 +1336,15 @@ def render_macro_dashboard():
         df_alloc.columns = [c.upper().replace("_", " ") for c in df_alloc.columns]
         render_terminal_table(df_alloc.reset_index(drop=True))
 
-        # Pie chart of allocation
-        alloc_data = db.get_target_allocation() or allocation
+        # Pie chart of ACTUAL allocation (from live positions)
+        positions = db.get_positions()
+        total_mv = sum(p["market_value"] for p in positions) or 1
+        actual_alloc = [
+            {"strategy_bucket": p["strategy_bucket"], "ticker": p["symbol"],
+             "weight_pct": p["market_value"] / total_mv * 100}
+            for p in positions if p["market_value"] > 0
+        ]
+        alloc_data = actual_alloc if actual_alloc else (db.get_target_allocation() or allocation)
         labels  = [f"{r.get('strategy_bucket','?')} ({r.get('ticker','?')})" for r in alloc_data]
         values  = [r.get("weight_pct", 0) for r in alloc_data]
 
@@ -988,30 +1354,30 @@ def render_macro_dashboard():
             hole=0.4,
             marker=dict(
                 colors=[
-                    "#00ff41", "#00d4ff", "#ffb000", "#ff6600",
-                    "#008f11", "#0077aa", "#cc8800", "#cc4400",
-                    "#00ff41", "#00d4ff", "#ffb000", "#ff6600",
-                    "#005500", "#003355", "#553300", "#551100",
+                    "#4caf50", "#2196f3", "#ff9900", "#f44336",
+                    "#26a69a", "#1565c0", "#e65100", "#b71c1c",
+                    "#66bb6a", "#42a5f5", "#ffa726", "#ef5350",
+                    "#1b5e20", "#0d47a1", "#bf360c", "#7f0000",
                 ],
-                line=dict(color="#0a0a0a", width=1),
+                line=dict(color="#131722", width=1),
             ),
-            textfont=dict(color="#00ff41", family="Courier New", size=10),
+            textfont=dict(color="#ffffff", family="IBM Plex Mono", size=10),
             textinfo="label+percent",
         )])
         fig.update_layout(
-            title=dict(text="BUCKET ALLOCATION", font=dict(color="#ffb000", family="Courier New", size=14)),
-            paper_bgcolor="#050505",
-            plot_bgcolor="#050505",
-            font=dict(color="#00ff41", family="Courier New"),
-            legend=dict(bgcolor="#050505", font=dict(color="#00ff41", size=9), bordercolor="#333"),
+            title=dict(text="BUCKET ALLOCATION", font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#131722",
+            plot_bgcolor="#131722",
+            font=dict(color="#d4d4d4", family="IBM Plex Mono"),
+            legend=dict(bgcolor="#0e1219", font=dict(color="#d4d4d4", size=9), bordercolor="#2a3244"),
             height=500,
             margin=dict(l=20, r=20, t=40, b=20),
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        # Bar chart: sub-strategy totals
+        # Bar chart: sub-strategy totals (from live positions)
         sub_totals = {"D": 0, "C": 0, "G": 0, "V": 0, "H": 0, "L": 0, "U": 0, "E": 0}
-        raw_alloc  = db.get_target_allocation() or allocation
+        raw_alloc  = actual_alloc if actual_alloc else (db.get_target_allocation() or allocation)
         for row in raw_alloc:
             b = row.get("strategy_bucket", "")
             w = row.get("weight_pct", 0)
@@ -1021,25 +1387,50 @@ def render_macro_dashboard():
                 if sub in sub_totals:
                     sub_totals[sub] += w
 
-        fig2 = go.Figure(data=[go.Bar(
-            x=list(sub_totals.keys()),
-            y=list(sub_totals.values()),
-            marker_color=["#00ff41" if v <= 70 else "#ff3333" for v in sub_totals.values()],
-            text=[f"{v:.1f}%" for v in sub_totals.values()],
-            textposition="outside",
-            textfont=dict(color="#00ff41"),
-        )])
-        fig2.add_hline(y=70, line_dash="dot", line_color="#ff6600",
-                       annotation_text="70% CAP", annotation_font_color="#ff6600")
+        # Stacked bar chart: opposing factor pairs side by side
+        # Each bar = one axis; two stacked segments = the two opposing sub-strategies
+        pair_labels = ["Defensive / Cyclical", "Growth / Value", "High Beta / Low Beta", "US / EM"]
+        first_subs  = ["D",  "G",  "H",  "U"]   # upper segment colors
+        second_subs = ["C",  "V",  "L",  "E"]   # lower segment colors
+        # Contrasting colors per pair:  Defensive=green, Cyclical=amber
+        #                               Growth=cyan,     Value=orange
+        #                               High Beta=red,   Low Beta=blue
+        #                               US=bright-green, EM=yellow
+        first_colors  = ["#4caf50", "#00d4ff", "#f44336", "#66bb6a"]
+        second_colors = ["#ff9900", "#ff6600", "#2196f3", "#ffd600"]
+
+        fig2 = go.Figure()
+        fig2.add_trace(go.Bar(
+            name="Defensive / Growth / Hi-β / US",
+            x=pair_labels,
+            y=[sub_totals[s] for s in first_subs],
+            marker_color=first_colors,
+            text=[f"{sub}: {sub_totals[sub]:.1f}%" for sub in first_subs],
+            textposition="inside",
+            textfont=dict(color="#ffffff", size=10, family="IBM Plex Mono"),
+        ))
+        fig2.add_trace(go.Bar(
+            name="Cyclical / Value / Lo-β / EM",
+            x=pair_labels,
+            y=[sub_totals[s] for s in second_subs],
+            marker_color=second_colors,
+            text=[f"{sub}: {sub_totals[sub]:.1f}%" for sub in second_subs],
+            textposition="inside",
+            textfont=dict(color="#0e1219", size=10, family="IBM Plex Mono"),
+        ))
+        fig2.add_hline(y=70, line_dash="dot", line_color="#ffffff",
+                       annotation_text="70% CAP", annotation_font_color="#ffffff")
         fig2.update_layout(
-            title=dict(text="SUB-STRATEGY TOTALS vs. 70% CAP",
-                       font=dict(color="#ffb000", family="Courier New", size=14)),
-            paper_bgcolor="#050505",
-            plot_bgcolor="#050505",
-            font=dict(color="#00ff41", family="Courier New"),
-            xaxis=dict(gridcolor="#1a1a1a", color="#008f11"),
-            yaxis=dict(gridcolor="#1a1a1a", color="#008f11", range=[0, 80]),
-            height=350,
+            barmode="stack",
+            title=dict(text="FACTOR EXPOSURE vs. 70% SUB-STRATEGY CAP",
+                       font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#131722",
+            plot_bgcolor="#0e1219",
+            font=dict(color="#d4d4d4", family="IBM Plex Mono"),
+            xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5"),
+            yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", range=[0, 110], ticksuffix="%"),
+            legend=dict(bgcolor="#0e1219", bordercolor="#2a3244", font=dict(color="#d4d4d4", size=9)),
+            height=380,
             margin=dict(l=20, r=20, t=40, b=20),
         )
         st.plotly_chart(fig2, use_container_width=True)

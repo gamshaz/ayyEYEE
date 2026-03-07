@@ -1,10 +1,10 @@
 You are a Chief Investment Officer and macro analyst.
-Today's date: 2026-03-06
+Today's date: 2026-03-07
 
 =============================================================
 TASK A — MACRO INDICATOR INTERPRETATION
 =============================================================
-Below are the latest FRED economic indicators (Jan 2023 to 2026-03-06).
+Below are the latest FRED economic indicators (Jan 2023 to 2026-03-07).
 For each one, provide a ONE-LINE interpretation (max 15 words) explaining
 what it signals for markets. Then write a 3-4 sentence MACRO REGIME NARRATIVE.
 

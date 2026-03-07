@@ -8,6 +8,7 @@ No market impact model — trades execute at the price provided.
 
 from typing import List, Dict, Any
 import database as db
+from macro_agent import BUCKET_AXES
 
 
 def execute_trades(
@@ -74,11 +75,22 @@ def execute_trades(
     # Update simulation state with new cash
     holdings_value = _compute_holdings_value(pos_map, prices)
     total_equity   = cash + holdings_value
+
+    # Enforce fully-invested rule: cash must not exceed 2% of portfolio
+    cash, total_equity, deploy_log = deploy_excess_cash(
+        cash, total_equity, pos_map, prices, current_date
+    )
+    if deploy_log:
+        log_lines.append("\n  AUTO-DEPLOY EXCESS CASH:")
+        log_lines.extend(deploy_log)
+        # Flush again after deployment
+        _flush_positions(pos_map, prices)
+
     db.set_simulation_state(current_date, cash, total_equity)
 
     log_lines.append("─" * 50)
     log_lines.append(f"  Cash after execution:  ${cash:>14,.2f}")
-    log_lines.append(f"  Holdings value:        ${holdings_value:>14,.2f}")
+    log_lines.append(f"  Holdings value:        ${_compute_holdings_value(pos_map, prices):>14,.2f}")
     log_lines.append(f"  Total equity:          ${total_equity:>14,.2f}")
 
     return {
@@ -102,6 +114,8 @@ def save_daily_snapshot(current_date: str, cash: float, positions: list, prices:
     return total_equity
 
 
+INIT_INVEST_FRACTION = 0.75   # deploy 75% at init, hold 25% ($250k) as cash reserve
+
 def initialize_positions_from_allocation(
     allocation: list,
     prices: dict,
@@ -112,13 +126,19 @@ def initialize_positions_from_allocation(
     Buys into all strategy buckets according to the macro agent's allocation.
     Called once at simulation initialization after user confirms macro analysis.
 
+    Deploys INIT_INVEST_FRACTION (75%) of cash into positions.
+    The remaining 25% ($250,000) is kept as a cash reserve.
+
     allocation: list of {strategy_bucket, ticker, weight_pct, rationale}
     prices:     current prices dict {ticker: price}
-    cash:       initial cash ($1,000,000)
+    cash:       total initial cash ($1,000,000)
 
     Returns remaining cash after initial purchases.
     """
+    investable_cash = cash * INIT_INVEST_FRACTION   # $750,000
+
     log_lines = [f"INITIAL ALLOCATION — {current_date}", "═" * 60]
+    log_lines.append(f"  Investable: ${investable_cash:,.0f}  |  Cash reserve: ${cash - investable_cash:,.0f}")
     pos_map = {}
 
     for row in allocation:
@@ -132,7 +152,7 @@ def initialize_positions_from_allocation(
             log_lines.append(f"  SKIP  {ticker}: no price available")
             continue
 
-        target_value = (weight_pct / 100.0) * cash
+        target_value = (weight_pct / 100.0) * investable_cash
         shares       = target_value / price
         trade_value  = shares * price
 
@@ -160,6 +180,11 @@ def initialize_positions_from_allocation(
 
     holdings_value = total_spent
     total_equity   = remaining_cash + holdings_value
+
+    # Note: deploy_excess_cash is intentionally NOT called here.
+    # The cash reserve ($250,000) is held deliberately and will be
+    # available for tactical trades during the simulation.
+
     db.set_simulation_state(current_date, remaining_cash, total_equity)
     db.insert_daily_snapshot(current_date, remaining_cash, holdings_value, total_equity)
 
@@ -169,6 +194,91 @@ def initialize_positions_from_allocation(
     print("\n".join(log_lines))
 
     return remaining_cash
+
+
+def deploy_excess_cash(
+    cash: float,
+    total_equity: float,
+    pos_map: dict,
+    prices: dict,
+    current_date: str,
+) -> tuple[float, float, list[str]]:
+    """
+    Enforces the fully-invested rule: if cash > 2% of total portfolio value,
+    deploy the excess proportionally into the current target allocation.
+
+    Called automatically at the end of every execute_trades() cycle.
+    Logged with reason: "Auto-deploy excess cash"
+
+    Returns:
+        (updated_cash, updated_total_equity, list of log lines)
+    """
+    MAX_CASH_RATIO = 0.02
+    CASH_RESERVE   = 250_000.0   # strategic reserve — never auto-deployed
+
+    # Only the portion of cash above the reserve is eligible for deployment
+    deployable = cash - CASH_RESERVE
+    if deployable <= 0 or total_equity <= 0:
+        return cash, total_equity, []
+    if deployable / total_equity <= MAX_CASH_RATIO:
+        return cash, total_equity, []
+
+    excess = deployable - MAX_CASH_RATIO * total_equity
+    target_alloc = db.get_target_allocation()
+    if not target_alloc:
+        return cash, total_equity, []
+
+    # Deploy proportionally to target weights (normalized to sum=1 among viable tickers)
+    viable = [(r["ticker"], r["weight_pct"]) for r in target_alloc if prices.get(r["ticker"], 0) > 0]
+    total_weight = sum(w for _, w in viable)
+    if total_weight <= 0:
+        return cash, total_equity, []
+
+    log_lines: list[str] = []
+    reason = "Auto-deploy excess cash"
+
+    for ticker, weight in viable:
+        deploy_amt = excess * (weight / total_weight)
+        price = prices[ticker]
+        shares = int(deploy_amt / price)
+        if shares <= 0:
+            continue
+
+        cost = shares * price
+        if cost > cash:
+            break
+
+        # Check sub-strategy cap before deploying
+        if _would_breach_sub_strategy_posmap(ticker, cost, pos_map, prices, total_equity, target_alloc):
+            continue
+
+        # Update in-memory pos_map
+        if ticker in pos_map:
+            old_sh   = pos_map[ticker]["shares"]
+            old_cost = pos_map[ticker]["average_cost"]
+            new_sh   = old_sh + shares
+            pos_map[ticker]["average_cost"] = (old_sh * old_cost + shares * price) / new_sh
+            pos_map[ticker]["shares"]       = new_sh
+        else:
+            # Find bucket from target allocation
+            bucket = next((r["strategy_bucket"] for r in target_alloc if r["ticker"] == ticker), "UNCLASSIFIED")
+            pos_map[ticker] = {
+                "strategy_bucket": bucket,
+                "shares":          shares,
+                "average_cost":    price,
+            }
+
+        cash -= cost
+        db.insert_transaction(current_date, "BUY", ticker, shares, price, reason)
+        log_lines.append(
+            f"    BUY   {ticker:6s}  {shares:8d} sh @ ${price:8.4f}  = ${cost:>12,.2f}  | {reason}"
+        )
+
+    # Recompute total equity after deployment
+    holdings_value = _compute_holdings_value(pos_map, prices)
+    total_equity   = cash + holdings_value
+
+    return cash, total_equity, log_lines
 
 
 # ─── Private helpers ───────────────────────────────────────────────────────────
@@ -244,6 +354,33 @@ def _compute_holdings_value(pos_map: dict, prices: dict) -> float:
         pos["shares"] * prices.get(ticker, 0)
         for ticker, pos in pos_map.items()
     )
+
+
+def _would_breach_sub_strategy_posmap(ticker, cost, pos_map, prices, total_equity, target_alloc):
+    """Returns True if buying this ticker would push any sub-strategy factor above 70%."""
+    MAX_SUB = 0.70
+    if total_equity <= 0:
+        return False
+    # Compute current sub-strategy weights from pos_map
+    sub_totals = {"D": 0.0, "C": 0.0, "G": 0.0, "V": 0.0, "H": 0.0, "L": 0.0, "U": 0.0, "E": 0.0}
+    for tk, pos in pos_map.items():
+        mv = pos["shares"] * prices.get(tk, 0)
+        bucket = pos.get("strategy_bucket", "")
+        axes = BUCKET_AXES.get(bucket, {})
+        w = mv / total_equity
+        for axis_key in ["dc", "gv", "hl", "ue"]:
+            sub = axes.get(axis_key, "")
+            if sub in sub_totals:
+                sub_totals[sub] += w
+    # Find which factors this ticker's bucket contributes to
+    bucket = next((r["strategy_bucket"] for r in target_alloc if r["ticker"] == ticker), "")
+    axes = BUCKET_AXES.get(bucket, {})
+    add_w = cost / total_equity
+    for axis_key in ["dc", "gv", "hl", "ue"]:
+        sub = axes.get(axis_key, "")
+        if sub and sub_totals.get(sub, 0) + add_w > MAX_SUB:
+            return True
+    return False
 
 
 def refresh_position_prices(prices: dict):

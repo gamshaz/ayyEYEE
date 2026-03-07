@@ -14,57 +14,57 @@ import execution_agent
 # ── Paste the full JSON from Claude desktop here ──────────────────────────────
 CLAUDE_RESPONSE = {
   "interpretations": {
-    "yield_curve_spread": "Curve re-steepening signals easing cycle underway, reducing recession risk.",
-    "cpi_yoy": "Inflation re-accelerating above target, limiting Fed's room to cut further.",
-    "unemployment_gap": "Labor market near full employment, economy running slightly hot.",
-    "output_gap": "Economy significantly above potential, suggesting overheating pressures building.",
-    "sp500_eps": "Earnings momentum weakening, corporate profitability under pressure.",
-    "fed_funds_rate": "Fed in easing cycle but cutting cautiously given sticky inflation."
+    "yield_curve_spread": "Steepening curve signals easing cycle reducing near-term recession risk.",
+    "cpi_yoy": "Inflation re-accelerating above target constrains Fed's ability to cut aggressively.",
+    "unemployment_gap": "Labor market at full employment with economy running marginally hot.",
+    "output_gap": "Economy well above potential output, overheating pressures likely building.",
+    "sp500_eps": "Deteriorating earnings momentum signals corporate margin compression ahead.",
+    "fed_funds_rate": "Fed cutting cautiously, balancing growth support against sticky inflation."
   },
-  "macro_regime_narrative": "The US economy is operating in a late-cycle expansion characterized by above-potential output, near-full employment, and re-accelerating inflation — a challenging combination for risk assets. The Fed is cutting rates but faces a difficult balancing act as CPI trends higher while EPS growth deteriorates, squeezing corporate margins. The re-steepening yield curve confirms the easing bias but also reflects inflation risk premium being priced back in. This environment favors quality and defensiveness over pure cyclical risk, with selective exposure to value where earnings resilience is strongest.",
+  "macro_regime_narrative": "The macro regime remains late-cycle expansion with simultaneous overheating and earnings deterioration — a classically difficult environment for risk assets. The Fed is easing but constrained by re-accelerating CPI, meaning real rates remain relatively elevated and long-duration assets face continued pressure. Falling EPS against an above-potential economy suggests margins are being squeezed rather than demand collapsing, which favors quality and defensiveness over pure cyclical beta. The steepening yield curve is a modest positive for financial conditions but insufficient to overcome the fundamental headwinds facing high-beta and growth-heavy portfolios.",
   "axis_scores": {
     "defensive_cyclical": {
       "favored": "Defensive",
       "confidence": 0.65,
-      "reasoning": "Falling EPS combined with an overheating economy and rising CPI creates a margin compression environment unfavorable to cyclicals. The output gap at 32% above potential historically precedes slowdowns, and with the unemployment gap near zero there is little room for further labor-driven demand acceleration. Defensive sectors with pricing power and stable cash flows are better positioned."
+      "reasoning": "Falling EPS with an overheating economy points to margin compression rather than demand-led growth, which historically hurts cyclicals more than defensives. The output gap at elevated levels combined with rising CPI suggests the economy is closer to a peak than a trough. Defensive sectors with pricing power and predictable cash flows offer better risk-adjusted returns in this environment."
     },
     "growth_value": {
       "favored": "Value",
       "confidence": 0.60,
-      "reasoning": "Declining EPS momentum and sticky inflation make high-multiple growth stocks vulnerable to re-rating as discount rates remain elevated. Value stocks with lower duration and stronger near-term cash flows offer better protection in a margin compression environment. The Fed cutting slowly means rates stay relatively high, which continues to pressure long-duration growth valuations."
+      "reasoning": "Declining EPS momentum makes it difficult to justify elevated growth multiples, particularly with the Fed cutting slowly and real rates staying positive. Value stocks with lower duration and stronger near-term earnings visibility are better positioned to weather margin compression. Rising CPI also benefits value sectors like energy and industrials with real asset exposure."
     },
     "high_low_beta": {
       "favored": "Low Beta",
       "confidence": 0.70,
-      "reasoning": "With the economy above potential and earnings deteriorating, volatility risk is asymmetrically skewed to the downside. High beta names are most exposed to any growth disappointment or inflation surprise that forces the Fed to pause cuts. Low beta provides downside cushion while still participating in any continued equity upside."
+      "reasoning": "The combination of above-potential output, rising inflation and falling earnings creates asymmetric downside risk that high beta names are most exposed to. Any growth disappointment or inflation surprise forcing a Fed pause would disproportionately hurt high beta positions. Low beta provides capital preservation while still participating in any continued equity upside from the easing cycle."
     },
     "us_em": {
       "favored": "US",
-      "confidence": 0.60,
-      "reasoning": "The Fed easing cycle is a modest positive for EM but rising US inflation and a still-elevated dollar create headwinds for emerging market assets. Falling global EPS and the overheating US economy suggest risk-off pressure that typically hits EM harder than US. A modest EM allocation is warranted given the steepening curve but US quality should dominate."
+      "confidence": 0.58,
+      "reasoning": "The Fed easing cycle provides modest EM tailwind but elevated US inflation supports a stronger dollar which historically headwinds EM assets. Falling global EPS and geopolitical uncertainty favor US quality over EM cyclical exposure. A selective EM allocation in value and low-vol buckets is warranted but US should remain the portfolio anchor."
     }
   },
   "allocation": [
-    {"strategy_bucket": "DGHU", "ticker": "XBI",  "weight_pct": 3.5,  "rationale": "Defensive biotech offers growth optionality but high beta limits sizing given risk-off bias."},
-    {"strategy_bucket": "DGHE", "ticker": "EMQQ", "weight_pct": 2.0,  "rationale": "EM tech growth exposure kept minimal given dollar strength and EM headwinds."},
-    {"strategy_bucket": "DGLU", "ticker": "XLV",  "weight_pct": 12.0, "rationale": "Healthcare is core defensive growth holding with stable earnings and pricing power."},
-    {"strategy_bucket": "DGLE", "ticker": "INDA", "weight_pct": 3.0,  "rationale": "India structural growth story intact but sized conservatively given EM caution."},
-    {"strategy_bucket": "DVHU", "ticker": "SDY",  "weight_pct": 6.0,  "rationale": "Dividend aristocrats offer value and income with moderate beta in late cycle."},
-    {"strategy_bucket": "DVHE", "ticker": "EELV", "weight_pct": 2.5,  "rationale": "EM low-vol value provides diversification but kept small given EM headwinds."},
-    {"strategy_bucket": "DVLU", "ticker": "SPLV", "weight_pct": 13.0, "rationale": "Low volatility US value is the highest conviction position given macro regime."},
-    {"strategy_bucket": "DVLE", "ticker": "EELV", "weight_pct": 2.0,  "rationale": "Defensive EM value allocation kept minimal, complements DVHE exposure."},
-    {"strategy_bucket": "CGHU", "ticker": "SMH",  "weight_pct": 7.0,  "rationale": "Semiconductors retain structural tailwind from AI but sized for high beta risk."},
-    {"strategy_bucket": "CGHE", "ticker": "EEM",  "weight_pct": 3.5,  "rationale": "Broad EM cyclical growth included for diversification at modest weight."},
-    {"strategy_bucket": "CGLU", "ticker": "QQQM", "weight_pct": 10.0, "rationale": "Large cap US tech growth offers quality cyclical exposure with lower beta profile."},
-    {"strategy_bucket": "CGLE", "ticker": "CQQQ", "weight_pct": 2.5,  "rationale": "China tech allocation minimal given regulatory and macro uncertainty."},
-    {"strategy_bucket": "CVHU", "ticker": "XLE",  "weight_pct": 6.5,  "rationale": "Energy value benefits from sticky inflation keeping commodity prices elevated."},
-    {"strategy_bucket": "CVHE", "ticker": "AVES", "weight_pct": 3.0,  "rationale": "EM value exposure via AVES provides commodity and EM value diversification."},
-    {"strategy_bucket": "CVLU", "ticker": "XLI",  "weight_pct": 11.0, "rationale": "Industrials offer cyclical value with lower beta, benefits from infrastructure spend."},
-    {"strategy_bucket": "CVLE", "ticker": "FEMS", "weight_pct": 12.5, "rationale": "EM small cap value rounds out portfolio with attractive valuations vs US peers."}
+    {"strategy_bucket": "DGHU", "ticker": "XBI",  "weight_pct": 3.5,  "rationale": "Biotech defensive growth keeps optionality but high beta limits sizing in risk-off regime."},
+    {"strategy_bucket": "DGHE", "ticker": "EMQQ", "weight_pct": 2.0,  "rationale": "EM tech growth kept minimal given dollar headwinds and weak EM earnings momentum."},
+    {"strategy_bucket": "DGLU", "ticker": "XLV",  "weight_pct": 12.0, "rationale": "Healthcare is highest conviction defensive growth with stable earnings and pricing power."},
+    {"strategy_bucket": "DGLE", "ticker": "INDA", "weight_pct": 3.0,  "rationale": "India structural growth story intact, sized conservatively given broad EM caution."},
+    {"strategy_bucket": "DVHU", "ticker": "SDY",  "weight_pct": 6.0,  "rationale": "Dividend aristocrats provide income and value with moderate beta in late cycle."},
+    {"strategy_bucket": "DVHE", "ticker": "EELV", "weight_pct": 2.5,  "rationale": "EM low-vol defensive value adds diversification, kept small given EM headwinds."},
+    {"strategy_bucket": "DVLU", "ticker": "SPLV", "weight_pct": 13.0, "rationale": "Highest conviction position — low vol US value perfectly matches macro regime."},
+    {"strategy_bucket": "DVLE", "ticker": "EELV", "weight_pct": 2.0,  "rationale": "Defensive EM low-vol rounds out EM defensive allocation alongside DVHE."},
+    {"strategy_bucket": "CGHU", "ticker": "SMH",  "weight_pct": 7.0,  "rationale": "Semiconductors retain AI structural tailwind, sized for elevated but manageable beta risk."},
+    {"strategy_bucket": "CGHE", "ticker": "EEM",  "weight_pct": 3.5,  "rationale": "Broad EM cyclical growth included for diversification at modest weight only."},
+    {"strategy_bucket": "CGLU", "ticker": "QQQM", "weight_pct": 10.0, "rationale": "Large cap US tech offers quality cyclical growth with relatively lower beta profile."},
+    {"strategy_bucket": "CGLE", "ticker": "CQQQ", "weight_pct": 2.5,  "rationale": "China tech kept minimal given regulatory overhang and macro uncertainty."},
+    {"strategy_bucket": "CVHU", "ticker": "XLE",  "weight_pct": 6.5,  "rationale": "Energy benefits from sticky inflation keeping commodity prices supported."},
+    {"strategy_bucket": "CVHE", "ticker": "AVES", "weight_pct": 3.0,  "rationale": "EM value via AVES provides commodity exposure and EM value diversification."},
+    {"strategy_bucket": "CVLU", "ticker": "XLI",  "weight_pct": 11.0, "rationale": "Industrials offer cyclical value with lower beta, supported by infrastructure spending."},
+    {"strategy_bucket": "CVLE", "ticker": "FEMS", "weight_pct": 12.5, "rationale": "EM small cap value offers attractive valuations vs US peers, rounds out portfolio."}
   ]
 }
 
-SIM_START_DATE = "2026-01-02"
+FRESH_START_DATE = "2026-01-02"   # used only when DB has no existing simulation
 
 
 def main():
@@ -72,9 +72,12 @@ def main():
     print("APPLYING MANUAL MACRO ANALYSIS")
     print("=" * 60)
 
-    # Ensure DB is ready
-    db.initialize_db()
+    # Always reset DB and start fresh at FRESH_START_DATE
+    print("    Resetting database...")
+    db.reset_db()
     today = datetime.today().strftime("%Y-%m-%d")
+    SIM_START_DATE = FRESH_START_DATE
+    print(f"    Sim date: {SIM_START_DATE}")
 
     # ── 1. Save macro interpretations to macro_log ────────────────
     print("\n[1/4] Saving macro indicator log...")
