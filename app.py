@@ -272,6 +272,70 @@ def terminal_text(text: str, color: str = "#00ff41", size: str = "0.8rem"):
     )
 
 
+def render_terminal_table(df: pd.DataFrame, color_fns: dict = None):
+    """Render a DataFrame as a Bloomberg-styled HTML table.
+
+    color_fns: {col_name: callable(value) -> css color string}
+    """
+    if df.empty:
+        terminal_text("NO DATA", color="#555")
+        return
+
+    headers = "".join(
+        f'<th style="background:#111;color:#ffb000;font-size:0.75rem;'
+        f'text-transform:uppercase;border:1px solid #333;padding:0.35rem 0.7rem;'
+        f'letter-spacing:1px;white-space:nowrap;">{col}</th>'
+        for col in df.columns
+    )
+
+    rows_html = ""
+    for _, row in df.iterrows():
+        cells = ""
+        for col in df.columns:
+            val = row[col]
+            color = "#00ff41"
+            if color_fns and col in color_fns:
+                color = color_fns[col](val)
+            cells += (
+                f'<td style="background:#080808;color:{color};font-size:0.78rem;'
+                f'border:1px solid #1a1a1a;padding:0.3rem 0.7rem;white-space:nowrap;">'
+                f'{val}</td>'
+            )
+        rows_html += f"<tr>{cells}</tr>"
+
+    html = (
+        '<div style="overflow-x:auto;margin:0.4rem 0;">'
+        '<table style="width:100%;border-collapse:collapse;'
+        "font-family:'Courier New',monospace;\">"
+        f'<thead><tr>{headers}</tr></thead>'
+        f'<tbody>{rows_html}</tbody>'
+        '</table></div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
+
+
+def _pnl_color(val):
+    try:
+        num = float(str(val).replace("+", "").replace("%", "").replace("$", "").replace(",", ""))
+        return "#00ff41" if num >= 0 else "#ff3333"
+    except Exception:
+        return "#00ff41"
+
+
+def _trend_color(val):
+    v = str(val).lower()
+    if v == "rising":  return "#00ff41"
+    if v == "falling": return "#ff3333"
+    return "#ffb000"
+
+
+def _action_color(val):
+    v = str(val).upper()
+    if v in ("BUY", "INIT_BUY"):  return "#00ff41"
+    if v == "SELL":                return "#ff3333"
+    return "#ffb000"
+
+
 # ─── TOP TICKER TAPE ──────────────────────────────────────────────────────────
 def render_ticker_tape():
     # Renders the top-of-page Bloomberg-style portfolio metrics bar
@@ -585,7 +649,7 @@ def render_trading_floor():
         )
         if st.session_state.proposed_trades:
             df_trades = pd.DataFrame(st.session_state.proposed_trades)
-            st.dataframe(df_trades, use_container_width=True, hide_index=True)
+            render_terminal_table(df_trades)
         else:
             terminal_text("NO TRADES PROPOSED — RUN [ RUN AGENTS ]", color="#555")
 
@@ -664,16 +728,7 @@ def render_portfolio():
 
     df = pd.DataFrame([{k: v for k, v in r.items() if not k.startswith("_")} for r in rows])
 
-    # Style positive/negative P&L
-    def color_pnl(val):
-        try:
-            num = float(str(val).replace("+", "").replace("%", "").replace("$", "").replace(",", ""))
-            return "color: #00ff41" if num >= 0 else "color: #ff3333"
-        except Exception:
-            return ""
-
-    styled = df.style.applymap(color_pnl, subset=["P&L", "P&L%"])
-    st.dataframe(styled, use_container_width=True, hide_index=True)
+    render_terminal_table(df, color_fns={"P&L": _pnl_color, "P&L%": _pnl_color})
 
     # Portfolio totals
     total_pnl = total_mv - total_cost
@@ -707,7 +762,7 @@ def render_portfolio():
         df_txns["shares"] = df_txns["shares"].map(lambda x: f"{x:,.4f}")
         df_txns["price"]  = df_txns["price"].map(lambda x: f"${x:,.4f}")
         df_txns.columns   = ["DATE", "ACTION", "TICKER", "SHARES", "PRICE", "REASON"]
-        st.dataframe(df_txns, use_container_width=True, hide_index=True)
+        render_terminal_table(df_txns, color_fns={"ACTION": _action_color})
     else:
         terminal_text("NO TRANSACTIONS YET", color="#555")
 
@@ -845,7 +900,7 @@ def render_performance():
     df_display["holdings_value"] = df_display["holdings_value"].map(lambda x: f"${x:,.2f}")
     df_display["total_equity"]   = df_display["total_equity"].map(lambda x: f"${x:,.2f}")
     df_display.columns = ["DATE", "CASH", "HOLDINGS", "TOTAL EQUITY"]
-    st.dataframe(df_display.iloc[::-1], use_container_width=True, hide_index=True)
+    render_terminal_table(df_display.iloc[::-1].reset_index(drop=True))
 
 
 # ─── TAB 4: MACRO DASHBOARD ───────────────────────────────────────────────────
@@ -874,14 +929,7 @@ def render_macro_dashboard():
     if summary_rows:
         df_macro = pd.DataFrame(summary_rows)[["indicator", "value", "unit", "trend", "interpretation"]]
         df_macro.columns = ["INDICATOR", "VALUE", "UNIT", "TREND", "INTERPRETATION"]
-
-        def color_trend(val):
-            if val == "rising":  return "color: #00ff41"
-            if val == "falling": return "color: #ff3333"
-            return "color: #ffb000"
-
-        styled = df_macro.style.applymap(color_trend, subset=["TREND"])
-        st.dataframe(styled, use_container_width=True, hide_index=True)
+        render_terminal_table(df_macro, color_fns={"TREND": _trend_color})
 
     # ── Regime narrative ──
     st.markdown("<br>", unsafe_allow_html=True)
@@ -910,7 +958,7 @@ def render_macro_dashboard():
                 "CONFIDENCE": f"{data.get('confidence', 0):.0%}",
                 "REASONING":  data.get("reasoning", ""),
             })
-        st.dataframe(pd.DataFrame(axis_rows), use_container_width=True, hide_index=True)
+        render_terminal_table(pd.DataFrame(axis_rows))
 
     # ── Allocation table + charts ──
     allocation = result.get("allocation", [])
@@ -927,7 +975,7 @@ def render_macro_dashboard():
         df_alloc = df_alloc.sort_values("weight_pct", ascending=False)
         df_alloc["weight_pct"] = df_alloc["weight_pct"].map(lambda x: f"{x:.2f}%")
         df_alloc.columns = [c.upper().replace("_", " ") for c in df_alloc.columns]
-        st.dataframe(df_alloc, use_container_width=True, hide_index=True)
+        render_terminal_table(df_alloc.reset_index(drop=True))
 
         # Pie chart of allocation
         alloc_data = db.get_target_allocation() or allocation
