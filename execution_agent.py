@@ -182,8 +182,8 @@ def initialize_positions_from_allocation(
     total_equity   = remaining_cash + holdings_value
 
     # Note: deploy_excess_cash is intentionally NOT called here.
-    # The cash reserve ($250,000) is held deliberately and will be
-    # available for tactical trades during the simulation.
+    # The initial $250k cash reserve is held for early tactical trades.
+    # Ongoing minimum cash floor is $20k (2% of $1M).
 
     db.set_simulation_state(current_date, remaining_cash, total_equity)
     db.insert_daily_snapshot(current_date, remaining_cash, holdings_value, total_equity)
@@ -204,8 +204,9 @@ def deploy_excess_cash(
     current_date: str,
 ) -> tuple[float, float, list[str]]:
     """
-    Enforces the fully-invested rule: if cash > 2% of total portfolio value,
-    deploy the excess proportionally into the current target allocation.
+    Enforces the fully-invested rule: deploy excess cash proportionally
+    into the current target allocation, keeping a minimum cash floor
+    of 2% of the initial portfolio ($1M) = $20,000.
 
     Called automatically at the end of every execute_trades() cycle.
     Logged with reason: "Auto-deploy excess cash"
@@ -213,17 +214,12 @@ def deploy_excess_cash(
     Returns:
         (updated_cash, updated_total_equity, list of log lines)
     """
-    MAX_CASH_RATIO = 0.02
-    CASH_RESERVE   = 250_000.0   # strategic reserve — never auto-deployed
+    MIN_CASH = 20_000.0   # 2% of $1M — always keep at least this much cash
 
-    # Only the portion of cash above the reserve is eligible for deployment
-    deployable = cash - CASH_RESERVE
-    if deployable <= 0 or total_equity <= 0:
-        return cash, total_equity, []
-    if deployable / total_equity <= MAX_CASH_RATIO:
+    if cash <= MIN_CASH or total_equity <= 0:
         return cash, total_equity, []
 
-    excess = deployable - MAX_CASH_RATIO * total_equity
+    excess = cash - MIN_CASH
     target_alloc = db.get_target_allocation()
     if not target_alloc:
         return cash, total_equity, []
@@ -245,7 +241,7 @@ def deploy_excess_cash(
             continue
 
         cost = shares * price
-        if cost > cash:
+        if cash - cost < MIN_CASH:
             break
 
         # Check sub-strategy cap before deploying
