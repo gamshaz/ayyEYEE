@@ -1,4 +1,4 @@
-# ayyEYEE — Paper Trading Simulator
+# ayyEYEE — ITM Paper Trading Simulator
 
 A Bloomberg terminal-style paper trading simulator that manages a **$1,000,000 portfolio** across 16 ETFs using a multi-agent AI architecture. Built for the IE MIF Deep Learning class competition.
 
@@ -29,6 +29,17 @@ Live Prices → Tactical Agent → Trade Signals → Risk Agent → Execution Ag
 | **Execution Agent** | Executes trades, tracks cost basis, takes daily portfolio snapshots |
 
 ## ETF Universe
+
+Each ETF is selected to represent one combination across **4 macro axes**:
+
+| Axis | Options | Description |
+|---|---|---|
+| **Cycle** | Defensive (D) / Cyclical (C) | Economic sensitivity |
+| **Style** | Growth (G) / Value (V) | Valuation and earnings profile |
+| **Risk** | High Beta (H) / Low Beta (L) | Volatility exposure |
+| **Geography** | US (U) / Emerging Markets (E) | Regional allocation |
+
+This produces **2 x 2 x 2 x 2 = 16 buckets**, each mapped to a single ETF:
 
 | Bucket | Ticker | Axes |
 |---|---|---|
