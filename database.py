@@ -1,7 +1,9 @@
 import sqlite3
+import csv
 import os
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "finance_game.db")
+CSV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "transactions.csv")
 
 # ETF universe mapping: strategy bucket -> ticker
 ETF_UNIVERSE = {
@@ -188,6 +190,15 @@ def insert_transaction(date: str, action: str, symbol: str,
     )
     conn.commit()
     conn.close()
+
+    # Append to CSV for Excel export
+    value = shares * price
+    write_header = not os.path.exists(CSV_PATH)
+    with open(CSV_PATH, "a", newline="") as f:
+        writer = csv.writer(f)
+        if write_header:
+            writer.writerow(["Date", "Action", "Symbol", "Shares", "Price", "Value", "Reason"])
+        writer.writerow([date, action, symbol, f"{shares:.4f}", f"{price:.4f}", f"{value:.2f}", reason])
 
 
 def get_transactions():

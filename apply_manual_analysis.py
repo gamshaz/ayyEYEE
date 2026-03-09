@@ -6,6 +6,7 @@ Run once after export_macro_data.py + Claude desktop analysis.
 """
 
 import json
+import os
 from datetime import datetime
 import database as db
 import data_utils
@@ -75,6 +76,11 @@ def main():
     # Always reset DB and start fresh at FRESH_START_DATE
     print("    Resetting database...")
     db.reset_db()
+
+    # Clear transactions CSV so it starts fresh alongside the new sim
+    if os.path.exists(db.CSV_PATH):
+        os.remove(db.CSV_PATH)
+        print("    Cleared transactions.csv")
     today = datetime.today().strftime("%Y-%m-%d")
     SIM_START_DATE = FRESH_START_DATE
     print(f"    Sim date: {SIM_START_DATE}")

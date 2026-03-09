@@ -1,8 +1,9 @@
 # Environment & secrets
 .env
 
-# Database
+# Database & exports
 finance_game.db
+transactions.csv
 
 # Python cache
 __pycache__/
