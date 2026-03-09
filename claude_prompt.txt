@@ -39,7 +39,7 @@ Then allocate across all 16 strategy buckets:
   DVLE: EELV    (axes: D/V/L/E)
   CGHU: SMH     (axes: C/G/H/U)
   CGHE: EEM     (axes: C/G/H/E)
-  CGLU: QQQM    (axes: C/G/L/U)
+  CGLU: RSP     (axes: C/G/L/U)
   CGLE: CQQQ    (axes: C/G/L/E)
   CVHU: XLE     (axes: C/V/H/U)
   CVHE: AVES    (axes: C/V/H/E)
@@ -102,7 +102,7 @@ RESPONSE FORMAT — return ONLY this JSON, nothing else:
     {"strategy_bucket": "DVLE", "ticker": "EELV", "weight_pct": 0.0, "rationale": "one line"},
     {"strategy_bucket": "CGHU", "ticker": "SMH",  "weight_pct": 0.0, "rationale": "one line"},
     {"strategy_bucket": "CGHE", "ticker": "EEM",  "weight_pct": 0.0, "rationale": "one line"},
-    {"strategy_bucket": "CGLU", "ticker": "QQQM", "weight_pct": 0.0, "rationale": "one line"},
+    {"strategy_bucket": "CGLU", "ticker": "RSP", "weight_pct": 0.0, "rationale": "one line"},
     {"strategy_bucket": "CGLE", "ticker": "CQQQ", "weight_pct": 0.0, "rationale": "one line"},
     {"strategy_bucket": "CVHU", "ticker": "XLE",  "weight_pct": 0.0, "rationale": "one line"},
     {"strategy_bucket": "CVHE", "ticker": "AVES", "weight_pct": 0.0, "rationale": "one line"},

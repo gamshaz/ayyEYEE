@@ -18,7 +18,7 @@ OUTPUT_JSON   = "macro_indicators_raw.json"
 ETF_UNIVERSE = {
     "DGHU": "XBI",  "DGHE": "EMQQ", "DGLU": "XLV",  "DGLE": "INDA",
     "DVHU": "SDY",  "DVHE": "EELV", "DVLU": "SPLV",  "DVLE": "EELV",
-    "CGHU": "SMH",  "CGHE": "EEM",  "CGLU": "QQQM",  "CGLE": "CQQQ",
+    "CGHU": "SMH",  "CGHE": "EEM",  "CGLU": "RSP",  "CGLE": "CQQQ",
     "CVHU": "XLE",  "CVHE": "AVES", "CVLU": "XLI",   "CVLE": "FEMS",
 }
 
@@ -173,7 +173,7 @@ RESPONSE FORMAT — return ONLY this JSON, nothing else:
     {{"strategy_bucket": "DVLE", "ticker": "EELV", "weight_pct": 0.0, "rationale": "one line"}},
     {{"strategy_bucket": "CGHU", "ticker": "SMH",  "weight_pct": 0.0, "rationale": "one line"}},
     {{"strategy_bucket": "CGHE", "ticker": "EEM",  "weight_pct": 0.0, "rationale": "one line"}},
-    {{"strategy_bucket": "CGLU", "ticker": "QQQM", "weight_pct": 0.0, "rationale": "one line"}},
+    {{"strategy_bucket": "CGLU", "ticker": "RSP", "weight_pct": 0.0, "rationale": "one line"}},
     {{"strategy_bucket": "CGLE", "ticker": "CQQQ", "weight_pct": 0.0, "rationale": "one line"}},
     {{"strategy_bucket": "CVHU", "ticker": "XLE",  "weight_pct": 0.0, "rationale": "one line"}},
     {{"strategy_bucket": "CVHE", "ticker": "AVES", "weight_pct": 0.0, "rationale": "one line"}},

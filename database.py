@@ -15,7 +15,7 @@ ETF_UNIVERSE = {
     "DVLE": "EELV",  # Defensive, Value, Low Beta, EM
     "CGHU": "SMH",   # Cyclical, Growth, High Beta, US
     "CGHE": "EEM",   # Cyclical, Growth, High Beta, EM
-    "CGLU": "QQQM",  # Cyclical, Growth, Low Beta, US
+    "CGLU": "RSP",   # Cyclical, Growth, Low Beta, US
     "CGLE": "CQQQ",  # Cyclical, Growth, Low Beta, EM
     "CVHU": "XLE",   # Cyclical, Value, High Beta, US
     "CVHE": "AVES",  # Cyclical, Value, High Beta, EM

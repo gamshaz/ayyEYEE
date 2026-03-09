@@ -55,7 +55,7 @@ CLAUDE_RESPONSE = {
     {"strategy_bucket": "DVLE", "ticker": "EELV", "weight_pct": 2.0,  "rationale": "Defensive EM low-vol rounds out EM defensive allocation alongside DVHE."},
     {"strategy_bucket": "CGHU", "ticker": "SMH",  "weight_pct": 7.0,  "rationale": "Semiconductors retain AI structural tailwind, sized for elevated but manageable beta risk."},
     {"strategy_bucket": "CGHE", "ticker": "EEM",  "weight_pct": 3.5,  "rationale": "Broad EM cyclical growth included for diversification at modest weight only."},
-    {"strategy_bucket": "CGLU", "ticker": "QQQM", "weight_pct": 10.0, "rationale": "Large cap US tech offers quality cyclical growth with relatively lower beta profile."},
+    {"strategy_bucket": "CGLU", "ticker": "RSP", "weight_pct": 10.0, "rationale": "Equal-weight S&P 500 offers broad cyclical growth with lower concentration risk and moderate beta."},
     {"strategy_bucket": "CGLE", "ticker": "CQQQ", "weight_pct": 2.5,  "rationale": "China tech kept minimal given regulatory overhang and macro uncertainty."},
     {"strategy_bucket": "CVHU", "ticker": "XLE",  "weight_pct": 6.5,  "rationale": "Energy benefits from sticky inflation keeping commodity prices supported."},
     {"strategy_bucket": "CVHE", "ticker": "AVES", "weight_pct": 3.0,  "rationale": "EM value via AVES provides commodity exposure and EM value diversification."},

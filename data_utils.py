@@ -19,7 +19,7 @@ MACRO_END   = datetime.today().strftime("%Y-%m-%d")
 # All ETF tickers used in the universe
 ALL_TICKERS = [
     "XBI", "EMQQ", "XLV", "INDA", "SDY", "EELV", "SPLV",
-    "SMH", "EEM", "QQQM", "CQQQ", "XLE", "AVES", "XLI", "FEMS"
+    "SMH", "EEM", "RSP", "CQQQ", "XLE", "AVES", "XLI", "FEMS"
 ]
 
 
