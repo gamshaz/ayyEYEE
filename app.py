@@ -23,116 +23,182 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─── Bloomberg Terminal CSS ───────────────────────────────────────────────────
+# ─── Modern Terminal CSS ───────────────────────────────────────────────────────
 BLOOMBERG_CSS = """
 <style>
-/* ── Global reset & font ── */
+/* ── Google Font ── */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap');
 
+/* ── Global reset & font ── */
 html, body, [class*="css"], .stApp, .block-container,
 div, p, span, label, button, input, select, textarea, th, td, li {
     font-family: 'IBM Plex Mono', 'Courier New', monospace !important;
 }
 
-/* ── Background ── */
-.stApp { background-color: #131722 !important; }
-.block-container { background-color: #131722 !important; padding-top: 1rem !important; }
-section[data-testid="stSidebar"] { background-color: #0e1219 !important; border-right: 1px solid #2a3244; }
+/* ── Backgrounds ── */
+.stApp { background-color: #080d1a !important; }
+.block-container { background-color: #080d1a !important; padding-top: 1rem !important; }
+section[data-testid="stSidebar"] {
+    background-color: #060b18 !important;
+    border-right: 1px solid #1a2540 !important;
+}
 
-/* ── Text colors ── */
-body, .stMarkdown, p, span, label, div { color: #d4d4d4 !important; }
-h1, h2, h3, h4, h5, h6 { color: #ff9900 !important; text-transform: uppercase; letter-spacing: 2px; }
-.stMetric label { color: #7a8ba5 !important; font-size: 0.75rem !important; text-transform: uppercase; }
-.stMetric [data-testid="stMetricValue"] { color: #ffffff !important; }
-.stMetric [data-testid="stMetricDelta"] { font-size: 0.8rem !important; }
+/* ── Text ── */
+body, .stMarkdown, p, span, label, div { color: #e2e8f0 !important; }
+h1, h2, h3, h4, h5, h6 {
+    color: #f59e0b !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.stMetric label {
+    color: #4a5878 !important;
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.stMetric [data-testid="stMetricValue"] { color: #e2e8f0 !important; }
+.stMetric [data-testid="stMetricDelta"] { font-size: 0.78rem !important; }
 
 /* ── Buttons ── */
 .stButton > button {
-    background-color: #1a2035 !important;
-    color: #ff9900 !important;
-    border: 1px solid #ff9900 !important;
-    border-radius: 2px !important;
+    background-color: #0d1526 !important;
+    color: #f59e0b !important;
+    border: 1px solid #f59e0b !important;
+    border-radius: 3px !important;
     font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.78rem !important;
+    font-size: 0.76rem !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     padding: 0.4rem 1.2rem !important;
-    transition: all 0.1s ease !important;
+    transition: background 0.15s ease, color 0.15s ease !important;
 }
 .stButton > button:hover {
-    background-color: #ff9900 !important;
-    color: #0e1219 !important;
+    background-color: #f59e0b !important;
+    color: #080d1a !important;
 }
 .stButton > button:active {
-    background-color: #cc7700 !important;
-    color: #0e1219 !important;
+    background-color: #d97706 !important;
+    color: #080d1a !important;
 }
 
-/* ── Tab styling ── */
+/* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"] {
-    background-color: #0e1219 !important;
-    border-bottom: 1px solid #ff9900 !important;
+    background-color: #060b18 !important;
+    border-bottom: 1px solid #1a2540 !important;
     gap: 0 !important;
 }
 .stTabs [data-baseweb="tab"] {
-    color: #7a8ba5 !important;
-    background-color: #0e1219 !important;
-    border: 1px solid #1e2a3a !important;
+    color: #4a5878 !important;
+    background-color: #060b18 !important;
+    border: 1px solid #1a2540 !important;
+    border-bottom: none !important;
     border-radius: 0 !important;
     font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.78rem !important;
+    font-size: 0.76rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    padding: 0.5rem 1.5rem !important;
+    letter-spacing: 1.5px !important;
+    padding: 0.55rem 1.6rem !important;
+    transition: color 0.15s ease !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    color: #e2e8f0 !important;
 }
 .stTabs [aria-selected="true"] {
-    color: #ff9900 !important;
-    background-color: #131722 !important;
-    border-bottom: 2px solid #ff9900 !important;
+    color: #f59e0b !important;
+    background: linear-gradient(180deg, #0d1526 0%, #080d1a 100%) !important;
+    border-bottom: 2px solid #f59e0b !important;
 }
 
-/* ── DataFrames / Tables ── */
-.stDataFrame, .dataframe { background-color: #0e1219 !important; }
+/* ── DataFrames ── */
+.stDataFrame, .dataframe { background-color: #0d1526 !important; }
 .stDataFrame thead th {
-    background-color: #1a2035 !important;
-    color: #ff9900 !important;
-    font-size: 0.75rem !important;
+    background-color: #0a1020 !important;
+    color: #f59e0b !important;
+    font-size: 0.72rem !important;
     text-transform: uppercase !important;
-    border: 1px solid #2a3244 !important;
+    border: 1px solid #1a2540 !important;
+    letter-spacing: 1px;
 }
 .stDataFrame tbody td {
-    background-color: #111827 !important;
-    color: #d4d4d4 !important;
-    border: 1px solid #1e2a3a !important;
-    font-size: 0.78rem !important;
+    background-color: #0d1526 !important;
+    color: #e2e8f0 !important;
+    border: 1px solid #1a2540 !important;
+    font-size: 0.76rem !important;
 }
 
-/* ── Input fields ── */
-.stTextInput input, .stTextArea textarea, .stSelectbox select {
-    background-color: #0e1219 !important;
-    color: #d4d4d4 !important;
-    border: 1px solid #2a3244 !important;
-    border-radius: 2px !important;
+/* ── Inputs ── */
+.stTextInput input, .stTextArea textarea {
+    background-color: #0d1526 !important;
+    color: #e2e8f0 !important;
+    border: 1px solid #1a2540 !important;
+    border-radius: 3px !important;
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.8rem !important;
+}
+.stTextInput input:focus, .stTextArea textarea:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 1px #3b82f6 !important;
+}
+.stSelectbox > div > div {
+    background-color: #0d1526 !important;
+    border: 1px solid #1a2540 !important;
+    color: #e2e8f0 !important;
+}
+.stNumberInput input {
+    background-color: #0d1526 !important;
+    color: #e2e8f0 !important;
+    border: 1px solid #1a2540 !important;
+    border-radius: 3px !important;
     font-family: 'IBM Plex Mono', monospace !important;
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0e1219; }
-::-webkit-scrollbar-thumb { background: #2a3244; border-radius: 2px; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #080d1a; }
+::-webkit-scrollbar-thumb { background: #1a2540; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
 
-/* ── Success / warning / error overrides ── */
-.stAlert { border-radius: 2px !important; border-left: 3px solid #ff9900 !important; }
-div[data-testid="stNotification"] { background-color: #0e1219 !important; }
+/* ── Alerts ── */
+.stAlert {
+    border-radius: 3px !important;
+    border-left: 3px solid #f59e0b !important;
+    background-color: #0d1526 !important;
+}
+div[data-testid="stNotification"] { background-color: #0d1526 !important; }
 
 /* ── Sidebar text ── */
-section[data-testid="stSidebar"] * { color: #d4d4d4 !important; }
+section[data-testid="stSidebar"] * { color: #e2e8f0 !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 { color: #ff9900 !important; }
+section[data-testid="stSidebar"] h3 { color: #f59e0b !important; }
+section[data-testid="stSidebar"] hr {
+    border-color: #1a2540 !important;
+    margin: 0.6rem 0 !important;
+}
 
 /* ── Plotly chart backgrounds ── */
-.js-plotly-plot .plotly { background: #131722 !important; }
+.js-plotly-plot .plotly { background: #080d1a !important; }
+
+/* ── Section header tag ── */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.75rem 0 0.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #f59e0b;
+    font-variant: small-caps;
+    font-weight: 500;
+}
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1a2540;
+}
 </style>
 """
 
@@ -243,69 +309,67 @@ def load_portfolio_state():
     }
 
 
-# ─── Helper: Bloomberg separator ──────────────────────────────────────────────
+# ─── Helper: Modern section separator ─────────────────────────────────────────
 def bsep(label: str = ""):
-    # Renders a Bloomberg-style terminal separator line
+    # Renders a modern section header with label and extending line
     if label:
         st.markdown(
-            f'<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-            f'font-size:0.78rem;margin:0.5rem 0;">'
-            f'{"═"*4} {label.upper()} {"═"*(max(4, 60-len(label)-6))}</div>',
+            f'<div class="section-header">{label.upper()}</div>',
             unsafe_allow_html=True
         )
     else:
         st.markdown(
-            '<div style="color:#2a3244;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-            'font-size:0.78rem;margin:0.4rem 0;">'
-            '{"─"*64}</div>',
+            '<div style="height:1px;background:#1a2540;margin:0.6rem 0;"></div>',
             unsafe_allow_html=True
         )
 
 
-def terminal_text(text: str, color: str = "#d4d4d4", size: str = "0.8rem"):
+def terminal_text(text: str, color: str = "#e2e8f0", size: str = "0.8rem"):
     # Renders monospace terminal-style text
     st.markdown(
         f'<pre style="color:{color};font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-        f'font-size:{size};background:#0e1219;padding:0.8rem;'
-        f'border:1px solid #2a3244;overflow-x:auto;">{text}</pre>',
+        f'font-size:{size};background:#0d1526;padding:0.9rem 1rem;'
+        f'border-left:3px solid #1a2540;border-radius:4px;'
+        f'overflow-x:auto;margin:0.3rem 0;">{text}</pre>',
         unsafe_allow_html=True
     )
 
 
 def render_terminal_table(df: pd.DataFrame, color_fns: dict = None):
-    """Render a DataFrame as a Bloomberg-styled HTML table.
+    """Render a DataFrame as a modernized dark HTML table.
 
     color_fns: {col_name: callable(value) -> css color string}
     """
     if df.empty:
-        terminal_text("NO DATA", color="#555")
+        terminal_text("NO DATA", color="#4a5878")
         return
 
     headers = "".join(
-        f'<th style="background:#1a2035;color:#ff9900;font-size:0.72rem;'
-        f'text-transform:uppercase;border:1px solid #2a3244;padding:0.35rem 0.7rem;'
-        f'letter-spacing:1px;white-space:nowrap;font-weight:500;">{col}</th>'
+        f'<th style="background:#0a1020;color:#f59e0b;font-size:0.72rem;'
+        f'text-transform:uppercase;border:1px solid #1a2540;padding:0.38rem 0.75rem;'
+        f'letter-spacing:1.2px;white-space:nowrap;font-weight:500;">{col}</th>'
         for col in df.columns
     )
 
     rows_html = ""
     for i, (_, row) in enumerate(df.iterrows()):
-        row_bg = "#111827" if i % 2 == 0 else "#0e1219"
+        row_bg = "#0d1526" if i % 2 == 0 else "#0a1020"
         cells = ""
         for col in df.columns:
             val = row[col]
-            color = "#d4d4d4"
+            color = "#e2e8f0"
             if color_fns and col in color_fns:
                 color = color_fns[col](val)
             cells += (
-                f'<td style="background:{row_bg};color:{color};font-size:0.78rem;'
-                f'border:1px solid #1e2a3a;padding:0.3rem 0.7rem;white-space:nowrap;">'
+                f'<td style="background:{row_bg};color:{color};font-size:0.76rem;'
+                f'border:1px solid #1a2540;padding:0.32rem 0.75rem;white-space:nowrap;'
+                f'transition:background 0.1s;">'
                 f'{val}</td>'
             )
-        rows_html += f"<tr>{cells}</tr>"
+        rows_html += f'<tr style="transition:background 0.1s;" onmouseover="this.style.background=\'#111d35\'" onmouseout="this.style.background=\'\';">{cells}</tr>'
 
     html = (
-        '<div style="overflow-x:auto;margin:0.4rem 0;">'
+        '<div style="overflow-x:auto;margin:0.35rem 0;border-radius:4px;border:1px solid #1a2540;">'
         '<table style="width:100%;border-collapse:collapse;'
         "font-family:'IBM Plex Mono','Courier New',monospace;\">"
         f'<thead><tr>{headers}</tr></thead>'
@@ -318,23 +382,23 @@ def render_terminal_table(df: pd.DataFrame, color_fns: dict = None):
 def _pnl_color(val):
     try:
         num = float(str(val).replace("+", "").replace("%", "").replace("$", "").replace(",", ""))
-        return "#4caf50" if num >= 0 else "#f44336"
+        return "#10b981" if num >= 0 else "#ef4444"
     except Exception:
-        return "#d4d4d4"
+        return "#e2e8f0"
 
 
 def _trend_color(val):
     v = str(val).lower()
-    if v == "rising":  return "#4caf50"
-    if v == "falling": return "#f44336"
-    return "#ff9900"
+    if v == "rising":  return "#10b981"
+    if v == "falling": return "#ef4444"
+    return "#f59e0b"
 
 
 def _action_color(val):
     v = str(val).upper()
-    if v in ("BUY", "INIT_BUY"):  return "#4caf50"
-    if v == "SELL":                return "#f44336"
-    return "#ff9900"
+    if v in ("BUY", "INIT_BUY"):  return "#10b981"
+    if v == "SELL":                return "#ef4444"
+    return "#f59e0b"
 
 
 # ─── TOP TICKER TAPE ──────────────────────────────────────────────────────────
@@ -347,51 +411,60 @@ def render_ticker_tape():
     dpct = pf["daily_pnl_pct"]
     tret = pf["total_return_pct"]
 
-    dpnl_color = "#4caf50" if dpnl >= 0 else "#f44336"
-    tret_color = "#4caf50" if tret >= 0 else "#f44336"
+    dpnl_color = "#10b981" if dpnl >= 0 else "#ef4444"
+    tret_color = "#10b981" if tret >= 0 else "#ef4444"
     dpnl_sign  = "+" if dpnl >= 0 else ""
     tret_sign  = "+" if tret >= 0 else ""
 
+    status_dot_color = "#10b981" if st.session_state.sim_started else "#f59e0b"
+
     tape_html = f"""
     <div style="
-        background:#0e1219;
-        border:1px solid #2a3244;
-        border-left:3px solid #ff9900;
-        border-radius:2px;
-        padding:0.6rem 1.5rem;
-        margin-bottom:1rem;
+        background:#0d1526;
+        border:1px solid #1a2540;
+        border-left:3px solid #f59e0b;
+        border-radius:4px;
+        padding:0.65rem 1.4rem;
+        margin-bottom:1.1rem;
         font-family:'IBM Plex Mono','Courier New',monospace;
-        font-size:0.82rem;
+        font-size:0.8rem;
         display:flex;
         flex-wrap:wrap;
-        gap:2rem;
+        gap:2.2rem;
         align-items:center;
     ">
-        <span style="color:#ff9900;font-weight:500;letter-spacing:2px;font-size:0.85rem;">
-            PAPER TRADING TERMINAL
+        <span style="display:flex;align-items:center;gap:0.5rem;">
+            <span style="color:{status_dot_color};font-size:0.65rem;animation:pulse 2s infinite;">&#9679;</span>
+            <span style="color:#f59e0b;font-weight:500;letter-spacing:2px;font-size:0.82rem;">PAPER TRADING TERMINAL</span>
         </span>
-        <span style="color:#2a3244;">|</span>
+        <span style="color:#1a2540;">&#124;</span>
         <span>
-            <span style="color:#7a8ba5;">PORTFOLIO</span>
-            <span style="color:#ffffff;"> ${tv:,.2f}</span>
-        </span>
-        <span>
-            <span style="color:#7a8ba5;">CASH</span>
-            <span style="color:#d4d4d4;"> ${cash:,.2f}</span>
+            <span style="color:#4a5878;font-size:0.72rem;letter-spacing:1px;">PORTFOLIO&nbsp;</span>
+            <span style="color:#e2e8f0;font-weight:500;">${tv:,.2f}</span>
         </span>
         <span>
-            <span style="color:#7a8ba5;">DAILY P&L</span>
-            <span style="color:{dpnl_color};"> {dpnl_sign}${dpnl:,.2f} ({dpnl_sign}{dpct:.2f}%)</span>
+            <span style="color:#4a5878;font-size:0.72rem;letter-spacing:1px;">CASH&nbsp;</span>
+            <span style="color:#e2e8f0;">${cash:,.2f}</span>
         </span>
         <span>
-            <span style="color:#7a8ba5;">TOTAL RETURN</span>
-            <span style="color:{tret_color};"> {tret_sign}{tret:.2f}%</span>
+            <span style="color:#4a5878;font-size:0.72rem;letter-spacing:1px;">DAILY P&amp;L&nbsp;</span>
+            <span style="color:{dpnl_color};font-weight:500;">{dpnl_sign}${dpnl:,.2f}&nbsp;<span style="font-size:0.72rem;">({dpnl_sign}{dpct:.2f}%)</span></span>
         </span>
         <span>
-            <span style="color:#7a8ba5;">SIM DATE</span>
-            <span style="color:#ff9900;"> {st.session_state.current_date}</span>
+            <span style="color:#4a5878;font-size:0.72rem;letter-spacing:1px;">TOTAL RETURN&nbsp;</span>
+            <span style="color:{tret_color};font-weight:500;">{tret_sign}{tret:.2f}%</span>
+        </span>
+        <span>
+            <span style="color:#4a5878;font-size:0.72rem;letter-spacing:1px;">SIM DATE&nbsp;</span>
+            <span style="color:#f59e0b;">{st.session_state.current_date}</span>
         </span>
     </div>
+    <style>
+    @keyframes pulse {{
+        0%, 100% {{ opacity: 1; }}
+        50% {{ opacity: 0.35; }}
+    }}
+    </style>
     """
     st.markdown(tape_html, unsafe_allow_html=True)
 
@@ -408,18 +481,18 @@ def render_sidebar():
             st.markdown("<br>", unsafe_allow_html=True)
 
         st.markdown(
-            '<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-            'font-size:0.85rem;font-weight:500;letter-spacing:2px;border-bottom:'
-            '1px solid #2a3244;padding-bottom:0.5rem;margin-bottom:1rem;text-transform:uppercase;">'
+            '<div style="color:#f59e0b;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.8rem;font-weight:500;letter-spacing:2px;border-bottom:'
+            '1px solid #1a2540;padding-bottom:0.5rem;margin-bottom:0.9rem;text-transform:uppercase;">'
             'Command Panel</div>',
             unsafe_allow_html=True
         )
 
         # Simulation date display
         st.markdown(
-            f'<div style="color:#7a8ba5;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-            f'font-size:0.8rem;margin-bottom:0.8rem;">'
-            f'SIM DATE <span style="color:#ff9900;">{st.session_state.current_date}</span></div>',
+            f'<div style="color:#4a5878;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            f'font-size:0.76rem;margin-bottom:0.75rem;letter-spacing:1px;">'
+            f'SIM DATE&nbsp;<span style="color:#f59e0b;">{st.session_state.current_date}</span></div>',
             unsafe_allow_html=True
         )
 
@@ -432,9 +505,9 @@ def render_sidebar():
         # ── CONFIRM MACRO ── (shown only after phase 1 complete, before phase 2)
         if st.session_state.macro_phase1_done and not st.session_state.macro_confirmed:
             st.markdown(
-                '<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-                'font-size:0.75rem;margin-top:0.5rem;">'
-                '⚠ REVIEW MACRO ANALYSIS IN TAB 4<br>THEN CONFIRM BELOW</div>',
+                '<div style="color:#f59e0b;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+                'font-size:0.72rem;margin-top:0.5rem;border-left:2px solid #f59e0b;padding-left:0.5rem;">'
+                '&#9888; REVIEW MACRO ANALYSIS IN MACRO TAB<br>THEN CONFIRM BELOW</div>',
                 unsafe_allow_html=True
             )
             feedback_input = st.text_input(
@@ -461,8 +534,9 @@ def render_sidebar():
         if st.session_state.approved_trades:
             n = len(st.session_state.approved_trades)
             st.markdown(
-                f'<div style="color:#ff9900;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-                f'font-size:0.75rem;">{n} APPROVED TRADE(S) PENDING</div>',
+                f'<div style="color:#f59e0b;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+                f'font-size:0.72rem;letter-spacing:1px;margin-bottom:0.3rem;">'
+                f'&#9670; {n} APPROVED TRADE(S) PENDING</div>',
                 unsafe_allow_html=True
             )
             if st.button("[ EXECUTE TRADES ]", key="btn_execute", use_container_width=True):
@@ -470,8 +544,8 @@ def render_sidebar():
 
         # ── RUN N DAYS ──
         st.markdown(
-            '<div style="color:#7a8ba5;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
-            'font-size:0.72rem;letter-spacing:1px;margin:0.5rem 0 0.3rem;">AUTO-RUN N DAYS</div>',
+            '<div style="color:#4a5878;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            'font-size:0.68rem;letter-spacing:1px;margin:0.5rem 0 0.3rem;text-transform:uppercase;">Auto-Run N Days</div>',
             unsafe_allow_html=True
         )
         n_days = st.number_input(
@@ -484,13 +558,13 @@ def render_sidebar():
         st.markdown("---")
 
         # ── STATUS ──
-        status_color = "#4caf50" if st.session_state.sim_started else "#ff9900"
+        status_color = "#10b981" if st.session_state.sim_started else "#f59e0b"
         status_label = "LIVE" if st.session_state.sim_started else "OFFLINE"
         last_run = st.session_state.last_run_time or "—"
         st.markdown(
-            f'<div style="font-family:\'IBM Plex Mono\',\'Courier New\',monospace;font-size:0.75rem;color:#7a8ba5;">'
-            f'STATUS <span style="color:{status_color};">● {status_label}</span><br>'
-            f'LAST RUN <span style="color:#d4d4d4;">{last_run}</span>'
+            f'<div style="font-family:\'IBM Plex Mono\',\'Courier New\',monospace;font-size:0.72rem;color:#4a5878;line-height:1.8;">'
+            f'STATUS&nbsp;<span style="color:{status_color};">&#9679; {status_label}</span><br>'
+            f'LAST RUN&nbsp;<span style="color:#e2e8f0;">{last_run}</span>'
             f'</div>',
             unsafe_allow_html=True
         )
@@ -723,50 +797,38 @@ def _handle_run_n_days(n: int):
 # ─── TAB 1: TRADING FLOOR ─────────────────────────────────────────────────────
 def render_trading_floor():
     st.markdown(
-        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ TRADING FLOOR ]</h3>',
+        '<h3 style="color:#f59e0b;letter-spacing:2px;font-weight:500;margin-bottom:0.75rem;">TRADING FLOOR</h3>',
         unsafe_allow_html=True
     )
 
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown(
-            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-            '═══ MACRO REGIME ═══</div>',
-            unsafe_allow_html=True
-        )
+        bsep("Macro Regime")
         result = st.session_state.get("macro_full_result") or st.session_state.get("macro_phase1_result")
         if result:
             narrative = result.get("regime_narrative", "—")
-            terminal_text(narrative, color="#d4d4d4")
+            terminal_text(narrative, color="#e2e8f0")
         else:
-            terminal_text("NO MACRO DATA — RUN [ INIT PORTFOLIO ]", color="#555")
+            terminal_text("NO MACRO DATA — RUN [ INIT PORTFOLIO ]", color="#4a5878")
 
     with col2:
-        st.markdown(
-            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-            '═══ PROPOSED TRADES ═══</div>',
-            unsafe_allow_html=True
-        )
+        bsep("Proposed Trades")
         if st.session_state.proposed_trades:
             df_trades = pd.DataFrame(st.session_state.proposed_trades)
             render_terminal_table(df_trades)
         else:
-            terminal_text("NO TRADES PROPOSED — RUN [ RUN AGENTS ]", color="#555")
+            terminal_text("NO TRADES PROPOSED — RUN [ RUN AGENTS ]", color="#4a5878")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(
-        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-        '═══ AGENT REASONING LOG ═══</div>',
-        unsafe_allow_html=True
-    )
+    bsep("Agent Reasoning Log")
 
     # ── APPROVED TRADES ──
     if st.session_state.approved_trades:
         st.markdown(
-            '<div style="color:#4caf50;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            '<div style="color:#10b981;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
             'font-size:0.72rem;letter-spacing:1px;font-weight:500;margin-bottom:0.3rem;">'
-            '▶ APPROVED TRADES</div>',
+            '&#9654; APPROVED TRADES</div>',
             unsafe_allow_html=True,
         )
         approved_rows = [
@@ -783,9 +845,9 @@ def render_trading_floor():
     # ── REJECTED TRADES ──
     if st.session_state.rejected_trades:
         st.markdown(
-            '<div style="color:#f44336;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            '<div style="color:#ef4444;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
             'font-size:0.72rem;letter-spacing:1px;font-weight:500;margin:0.6rem 0 0.3rem;">'
-            '✕ REJECTED TRADES</div>',
+            '&#10005; REJECTED TRADES</div>',
             unsafe_allow_html=True,
         )
         rejected_rows = [
@@ -798,15 +860,15 @@ def render_trading_floor():
         ]
         render_terminal_table(
             pd.DataFrame(rejected_rows),
-            color_fns={"ACTION": lambda _: "#f44336"},
+            color_fns={"ACTION": lambda _: "#ef4444"},
         )
 
     # ── EXECUTION LOG ──
     if st.session_state.agent_log:
         st.markdown(
-            '<div style="color:#7a8ba5;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
+            '<div style="color:#4a5878;font-family:\'IBM Plex Mono\',\'Courier New\',monospace;'
             'font-size:0.72rem;letter-spacing:1px;font-weight:500;margin:0.6rem 0 0.3rem;">'
-            '■ EXECUTION LOG</div>',
+            '&#9632; EXECUTION LOG</div>',
             unsafe_allow_html=True,
         )
         terminal_text(st.session_state.agent_log)
@@ -815,20 +877,20 @@ def render_trading_floor():
     if (not st.session_state.approved_trades
             and not st.session_state.rejected_trades
             and not st.session_state.agent_log):
-        terminal_text("NO LOG ENTRIES — RUN [ ADVANCE DAY ] → [ RUN AGENTS ] → [ EXECUTE TRADES ]", color="#555")
+        terminal_text("NO LOG ENTRIES — RUN [ ADVANCE DAY ] → [ RUN AGENTS ] → [ EXECUTE TRADES ]", color="#4a5878")
 
 
 # ─── TAB 2: PORTFOLIO ─────────────────────────────────────────────────────────
 def render_portfolio():
     st.markdown(
-        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ PORTFOLIO HOLDINGS ]</h3>',
+        '<h3 style="color:#f59e0b;letter-spacing:2px;font-weight:500;margin-bottom:0.75rem;">PORTFOLIO HOLDINGS</h3>',
         unsafe_allow_html=True
     )
     positions = db.get_positions()
     prices    = st.session_state.prices
 
     if not positions:
-        terminal_text("NO POSITIONS — INITIALIZE PORTFOLIO FIRST", color="#555")
+        terminal_text("NO POSITIONS — INITIALIZE PORTFOLIO FIRST", color="#4a5878")
         return
 
     rows = []
@@ -868,15 +930,15 @@ def render_portfolio():
     # Portfolio totals
     total_pnl = total_mv - total_cost
     total_pnl_pct = (total_pnl / total_cost * 100) if total_cost > 0 else 0.0
-    pnl_color = "#4caf50" if total_pnl >= 0 else "#f44336"
+    pnl_color = "#10b981" if total_pnl >= 0 else "#ef4444"
 
     st.markdown(
-        f'<div style="font-family:\'IBM Plex Mono\',\'Courier New\',monospace;font-size:0.8rem;'
-        f'border-top:1px solid #2a3244;padding-top:0.5rem;margin-top:0.5rem;color:#7a8ba5;">'
-        f'<span style="color:#ff9900;">TOTAL HOLDINGS</span> '
-        f'<span style="color:#ffffff;">${total_mv:,.2f}</span>'
+        f'<div style="font-family:\'IBM Plex Mono\',\'Courier New\',monospace;font-size:0.78rem;'
+        f'border-top:1px solid #1a2540;padding-top:0.5rem;margin-top:0.5rem;color:#4a5878;">'
+        f'<span style="color:#f59e0b;">TOTAL HOLDINGS</span> '
+        f'<span style="color:#e2e8f0;">${total_mv:,.2f}</span>'
         f' &nbsp;|&nbsp; '
-        f'<span style="color:#ff9900;">TOTAL P&L</span> '
+        f'<span style="color:#f59e0b;">TOTAL P&L</span> '
         f'<span style="color:{pnl_color};">'
         f'{"+" if total_pnl>=0 else ""}${total_pnl:,.2f} '
         f'({"+" if total_pnl_pct>=0 else ""}{total_pnl_pct:.2f}%)'
@@ -886,11 +948,7 @@ def render_portfolio():
 
     # ── Portfolio Treemap Heatmap ──
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(
-        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-        '═══ POSITION HEATMAP ═══</div>',
-        unsafe_allow_html=True
-    )
+    bsep("Position Heatmap")
     tree_labels = []
     tree_parents = []
     tree_values = []
@@ -914,18 +972,18 @@ def render_portfolio():
             marker=dict(
                 colors=tree_colors,
                 colorscale=[
-                    [0.0, "#b71c1c"], [0.25, "#f44336"], [0.45, "#424242"],
-                    [0.55, "#424242"], [0.75, "#4caf50"], [1.0, "#1b5e20"],
+                    [0.0, "#7f1d1d"], [0.25, "#ef4444"], [0.45, "#1e2a3a"],
+                    [0.55, "#1e2a3a"], [0.75, "#10b981"], [1.0, "#064e3b"],
                 ],
                 cmid=0,
                 colorbar=dict(
-                    title=dict(text="P&L %", font=dict(color="#d4d4d4")),
-                    tickfont=dict(color="#d4d4d4"),
+                    title=dict(text="P&L %", font=dict(color="#e2e8f0")),
+                    tickfont=dict(color="#e2e8f0"),
                     ticksuffix="%",
-                    bgcolor="#131722",
-                    bordercolor="#2a3244",
+                    bgcolor="#080d1a",
+                    bordercolor="#1a2540",
                 ),
-                line=dict(color="#131722", width=2),
+                line=dict(color="#080d1a", width=2),
             ),
             text=tree_text,
             textfont=dict(family="IBM Plex Mono", size=12),
@@ -934,9 +992,9 @@ def render_portfolio():
         ))
         fig_tree.update_layout(
             title=dict(text="HOLDINGS HEATMAP — SIZE = WEIGHT, COLOR = P&L",
-                       font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-            paper_bgcolor="#131722",
-            font=dict(color="#ffffff", family="IBM Plex Mono"),
+                       font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#080d1a",
+            font=dict(color="#e2e8f0", family="IBM Plex Mono"),
             height=420,
             margin=dict(l=10, r=10, t=40, b=10),
         )
@@ -944,11 +1002,7 @@ def render_portfolio():
 
     # Recent transactions
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(
-        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-        '═══ RECENT TRANSACTIONS ═══</div>',
-        unsafe_allow_html=True
-    )
+    bsep("Recent Transactions")
     txns = db.get_transactions()[:20]
     if txns:
         df_txns = pd.DataFrame(txns)[["date", "action", "symbol", "shares", "price", "reason"]]
@@ -957,19 +1011,19 @@ def render_portfolio():
         df_txns.columns   = ["DATE", "ACTION", "TICKER", "SHARES", "PRICE", "REASON"]
         render_terminal_table(df_txns, color_fns={"ACTION": _action_color})
     else:
-        terminal_text("NO TRANSACTIONS YET", color="#555")
+        terminal_text("NO TRANSACTIONS YET", color="#4a5878")
 
 
 # ─── TAB 3: PERFORMANCE ───────────────────────────────────────────────────────
 def render_performance():
     st.markdown(
-        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ PERFORMANCE ANALYTICS ]</h3>',
+        '<h3 style="color:#f59e0b;letter-spacing:2px;font-weight:500;margin-bottom:0.75rem;">PERFORMANCE ANALYTICS</h3>',
         unsafe_allow_html=True
     )
     snapshots = db.get_daily_snapshots()
 
     if len(snapshots) < 2:
-        terminal_text("INSUFFICIENT DATA — RUN SIMULATION FOR AT LEAST 2 DAYS", color="#555")
+        terminal_text("INSUFFICIENT DATA — RUN SIMULATION FOR AT LEAST 2 DAYS", color="#4a5878")
         return
 
     df_snap = pd.DataFrame(snapshots)
@@ -980,9 +1034,9 @@ def render_performance():
     # simulation before real market data exists for those dates)
     if df_snap["total_equity"].std() < 1.0:
         st.markdown(
-            '<div style="background:#1a1a00;border:1px solid #ff9900;border-left:3px solid #ff9900;'
-            'border-radius:2px;padding:0.6rem 1rem;margin-bottom:0.8rem;font-family:\'IBM Plex Mono\','
-            '\'Courier New\',monospace;font-size:0.75rem;color:#ff9900;">'
+            '<div style="background:#1a1500;border:1px solid #f59e0b;border-left:3px solid #f59e0b;'
+            'border-radius:4px;padding:0.65rem 1rem;margin-bottom:0.8rem;font-family:\'IBM Plex Mono\','
+            '\'Courier New\',monospace;font-size:0.74rem;color:#f59e0b;">'
             'NOTE: Portfolio equity is flat. This is expected when simulation dates have advanced '
             'beyond the last available market close — yfinance returns the most recent known price '
             'for all future dates. P&amp;L will populate once real trading days with new closes are reached.'
@@ -1002,38 +1056,42 @@ def render_performance():
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        ret_color = "#4caf50" if total_return >= 0 else "#f44336"
+        ret_color = "#10b981" if total_return >= 0 else "#ef4444"
         st.markdown(
-            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
-            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">TOTAL RETURN</div>'
-            f'<div style="color:{ret_color};font-size:1.3rem;font-weight:500;">'
+            f'<div style="background:#0d1526;border:1px solid #1a2540;border-top:2px solid #f59e0b;'
+            f'padding:1.1rem 1rem;text-align:center;border-radius:4px;">'
+            f'<div style="color:#4a5878;font-size:0.68rem;letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">Total Return</div>'
+            f'<div style="color:{ret_color};font-size:1.4rem;font-weight:500;">'
             f'{"+"if total_return>=0 else ""}{total_return:.2f}%</div></div>',
             unsafe_allow_html=True
         )
     with c2:
-        dd_color = "#f44336" if max_drawdown < -5 else "#ff9900"
+        dd_color = "#ef4444" if max_drawdown < -5 else "#f59e0b"
         st.markdown(
-            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
-            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">MAX DRAWDOWN</div>'
-            f'<div style="color:{dd_color};font-size:1.3rem;font-weight:500;">'
+            f'<div style="background:#0d1526;border:1px solid #1a2540;border-top:2px solid #f59e0b;'
+            f'padding:1.1rem 1rem;text-align:center;border-radius:4px;">'
+            f'<div style="color:#4a5878;font-size:0.68rem;letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">Max Drawdown</div>'
+            f'<div style="color:{dd_color};font-size:1.4rem;font-weight:500;">'
             f'{max_drawdown:.2f}%</div></div>',
             unsafe_allow_html=True
         )
     with c3:
-        sh_color = "#4caf50" if sharpe > 1 else ("#ff9900" if sharpe > 0 else "#f44336")
+        sh_color = "#10b981" if sharpe > 1 else ("#f59e0b" if sharpe > 0 else "#ef4444")
         st.markdown(
-            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
-            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">SHARPE RATIO</div>'
-            f'<div style="color:{sh_color};font-size:1.3rem;font-weight:500;">'
+            f'<div style="background:#0d1526;border:1px solid #1a2540;border-top:2px solid #f59e0b;'
+            f'padding:1.1rem 1rem;text-align:center;border-radius:4px;">'
+            f'<div style="color:#4a5878;font-size:0.68rem;letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">Sharpe Ratio</div>'
+            f'<div style="color:{sh_color};font-size:1.4rem;font-weight:500;">'
             f'{sharpe:.2f}</div></div>',
             unsafe_allow_html=True
         )
     with c4:
-        wr_color = "#4caf50" if win_rate > 50 else "#f44336"
+        wr_color = "#10b981" if win_rate > 50 else "#ef4444"
         st.markdown(
-            f'<div style="background:#0e1219;border:1px solid #2a3244;border-top:2px solid #ff9900;padding:1rem;text-align:center;border-radius:2px;">'
-            f'<div style="color:#7a8ba5;font-size:0.7rem;letter-spacing:1px;margin-bottom:0.4rem;">WIN RATE</div>'
-            f'<div style="color:{wr_color};font-size:1.3rem;font-weight:500;">'
+            f'<div style="background:#0d1526;border:1px solid #1a2540;border-top:2px solid #f59e0b;'
+            f'padding:1.1rem 1rem;text-align:center;border-radius:4px;">'
+            f'<div style="color:#4a5878;font-size:0.68rem;letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">Win Rate</div>'
+            f'<div style="color:{wr_color};font-size:1.4rem;font-weight:500;">'
             f'{win_rate:.1f}%</div></div>',
             unsafe_allow_html=True
         )
@@ -1047,24 +1105,24 @@ def render_performance():
         y=df_snap["total_equity"],
         mode="lines",
         name="Portfolio Equity",
-        line=dict(color="#4caf50", width=2),
+        line=dict(color="#10b981", width=2),
     ))
     fig.add_trace(go.Scatter(
         x=df_snap["date"],
         y=[initial_equity] * len(df_snap),
         mode="lines",
         name="Initial Capital",
-        line=dict(color="#ff9900", width=1, dash="dot"),
+        line=dict(color="#f59e0b", width=1, dash="dot"),
     ))
     fig.update_layout(
-        title=dict(text="EQUITY CURVE", font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-        paper_bgcolor="#131722",
-        plot_bgcolor="#0e1219",
-        font=dict(color="#d4d4d4", family="IBM Plex Mono"),
-        xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", showgrid=True),
-        yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", showgrid=True,
+        title=dict(text="EQUITY CURVE", font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+        paper_bgcolor="#080d1a",
+        plot_bgcolor="#0d1526",
+        font=dict(color="#e2e8f0", family="IBM Plex Mono"),
+        xaxis=dict(gridcolor="#1a2540", color="#4a5878", showgrid=True),
+        yaxis=dict(gridcolor="#1a2540", color="#4a5878", showgrid=True,
                    tickformat="$,.0f", autorange=True, rangemode="normal"),
-        legend=dict(bgcolor="#0e1219", bordercolor="#2a3244", font=dict(color="#d4d4d4")),
+        legend=dict(bgcolor="#0d1526", bordercolor="#1a2540", font=dict(color="#e2e8f0")),
         height=400,
         margin=dict(l=20, r=20, t=40, b=20),
     )
@@ -1077,17 +1135,17 @@ def render_performance():
         y=drawdown,
         mode="lines",
         name="Drawdown",
-        line=dict(color="#ff3333", width=1.5),
+        line=dict(color="#ef4444", width=1.5),
         fill="tozeroy",
-        fillcolor="rgba(255,51,51,0.08)",
+        fillcolor="rgba(239,68,68,0.08)",
     ))
     fig2.update_layout(
-        title=dict(text="DRAWDOWN (%)", font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-        paper_bgcolor="#131722",
-        plot_bgcolor="#0e1219",
-        font=dict(color="#d4d4d4", family="IBM Plex Mono"),
-        xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5"),
-        yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", tickformat=".2f"),
+        title=dict(text="DRAWDOWN (%)", font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+        paper_bgcolor="#080d1a",
+        plot_bgcolor="#0d1526",
+        font=dict(color="#e2e8f0", family="IBM Plex Mono"),
+        xaxis=dict(gridcolor="#1a2540", color="#4a5878"),
+        yaxis=dict(gridcolor="#1a2540", color="#4a5878", tickformat=".2f"),
         height=250,
         margin=dict(l=20, r=20, t=40, b=20),
     )
@@ -1095,11 +1153,7 @@ def render_performance():
 
     # ── ETF Correlation Matrix (FX-matrix style) ──
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(
-        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-        '═══ ETF CORRELATION MATRIX ═══</div>',
-        unsafe_allow_html=True
-    )
+    bsep("ETF Correlation Matrix")
     try:
         sim_date = st.session_state.current_date
         price_hist = data_utils.get_price_history_with_warmup(sim_date)
@@ -1115,46 +1169,42 @@ def render_performance():
                     x=corr.columns.tolist(),
                     y=corr.index.tolist(),
                     colorscale=[
-                        [0.0, "#b71c1c"], [0.25, "#f44336"],
-                        [0.5, "#1a1a2e"],
-                        [0.75, "#4caf50"], [1.0, "#1b5e20"],
+                        [0.0, "#7f1d1d"], [0.25, "#ef4444"],
+                        [0.5, "#0d1526"],
+                        [0.75, "#10b981"], [1.0, "#064e3b"],
                     ],
                     zmin=-1, zmax=1,
                     text=corr.values.round(2),
                     texttemplate="%{text}",
-                    textfont=dict(size=10, color="#ffffff", family="IBM Plex Mono"),
+                    textfont=dict(size=10, color="#e2e8f0", family="IBM Plex Mono"),
                     colorbar=dict(
-                        title=dict(text="Corr", font=dict(color="#d4d4d4")),
-                        tickfont=dict(color="#d4d4d4"),
-                        bgcolor="#131722", bordercolor="#2a3244",
+                        title=dict(text="Corr", font=dict(color="#e2e8f0")),
+                        tickfont=dict(color="#e2e8f0"),
+                        bgcolor="#080d1a", bordercolor="#1a2540",
                     ),
                     hovertemplate="%{x} vs %{y}: %{z:.3f}<extra></extra>",
                 ))
                 fig_corr.update_layout(
                     title=dict(text="RETURN CORRELATION MATRIX",
-                               font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-                    paper_bgcolor="#131722",
-                    plot_bgcolor="#0e1219",
-                    font=dict(color="#d4d4d4", family="IBM Plex Mono"),
-                    xaxis=dict(color="#7a8ba5", tickangle=-45),
-                    yaxis=dict(color="#7a8ba5", autorange="reversed"),
+                               font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+                    paper_bgcolor="#080d1a",
+                    plot_bgcolor="#0d1526",
+                    font=dict(color="#e2e8f0", family="IBM Plex Mono"),
+                    xaxis=dict(color="#4a5878", tickangle=-45),
+                    yaxis=dict(color="#4a5878", autorange="reversed"),
                     height=500,
                     margin=dict(l=20, r=20, t=40, b=20),
                 )
                 st.plotly_chart(fig_corr, use_container_width=True)
             else:
-                terminal_text("INSUFFICIENT HELD TICKERS FOR CORRELATION MATRIX", color="#555")
+                terminal_text("INSUFFICIENT HELD TICKERS FOR CORRELATION MATRIX", color="#4a5878")
         else:
-            terminal_text("INSUFFICIENT PRICE HISTORY FOR CORRELATION MATRIX", color="#555")
+            terminal_text("INSUFFICIENT PRICE HISTORY FOR CORRELATION MATRIX", color="#4a5878")
     except Exception as e:
-        terminal_text(f"CORRELATION MATRIX ERROR: {e}", color="#f44336")
+        terminal_text(f"CORRELATION MATRIX ERROR: {e}", color="#ef4444")
 
     # ── Daily snapshots table ──
-    st.markdown(
-        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-        '═══ DAILY SNAPSHOTS ═══</div>',
-        unsafe_allow_html=True
-    )
+    bsep("Daily Snapshots")
     df_display = df_snap[["date", "cash", "holdings_value", "total_equity"]].copy()
     df_display["date"]           = df_display["date"].dt.strftime("%Y-%m-%d")
     df_display["cash"]           = df_display["cash"].map(lambda x: f"${x:,.2f}")
@@ -1167,7 +1217,7 @@ def render_performance():
 # ─── TAB 4: MACRO DASHBOARD ───────────────────────────────────────────────────
 def render_macro_dashboard():
     st.markdown(
-        '<h3 style="color:#ff9900;letter-spacing:2px;font-weight:500;">[ MACRO DASHBOARD ]</h3>',
+        '<h3 style="color:#f59e0b;letter-spacing:2px;font-weight:500;margin-bottom:0.75rem;">MACRO DASHBOARD</h3>',
         unsafe_allow_html=True
     )
 
@@ -1206,11 +1256,7 @@ def render_macro_dashboard():
         factors = list(factor_names.keys())
         target_vals = [target_sub[f] for f in factors]
         actual_vals = [actual_sub[f] for f in factors]
-        st.markdown(
-            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-            '═══ FACTOR DRIFT: TARGET vs ACTUAL ═══</div>',
-            unsafe_allow_html=True
-        )
+        bsep("Factor Drift: Target vs Actual")
 
         # Grouped bar chart: target vs actual
         fig_drift = go.Figure()
@@ -1218,34 +1264,34 @@ def render_macro_dashboard():
             name="Target",
             x=[factor_names[f] for f in factors],
             y=target_vals,
-            marker_color="#2a3244",
-            marker_line=dict(color="#ff9900", width=1),
+            marker_color="#1a2540",
+            marker_line=dict(color="#f59e0b", width=1),
             text=[f"{v:.1f}%" for v in target_vals],
             textposition="outside",
-            textfont=dict(color="#ff9900", size=10, family="IBM Plex Mono"),
+            textfont=dict(color="#f59e0b", size=10, family="IBM Plex Mono"),
         ))
         fig_drift.add_trace(go.Bar(
             name="Actual",
             x=[factor_names[f] for f in factors],
             y=actual_vals,
-            marker_color=["#4caf50" if a >= t else "#f44336" for a, t in zip(actual_vals, target_vals)],
+            marker_color=["#10b981" if a >= t else "#ef4444" for a, t in zip(actual_vals, target_vals)],
             text=[f"{v:.1f}%" for v in actual_vals],
             textposition="outside",
-            textfont=dict(color="#ffffff", size=10, family="IBM Plex Mono"),
+            textfont=dict(color="#e2e8f0", size=10, family="IBM Plex Mono"),
         ))
-        fig_drift.add_hline(y=70, line_dash="dot", line_color="#ffffff",
-                            annotation_text="70% CAP", annotation_font_color="#ffffff",
+        fig_drift.add_hline(y=70, line_dash="dot", line_color="#e2e8f0",
+                            annotation_text="70% CAP", annotation_font_color="#e2e8f0",
                             annotation_font_size=10)
         fig_drift.update_layout(
             barmode="group",
             title=dict(text="FACTOR ALLOCATION: TARGET vs ACTUAL",
-                       font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-            paper_bgcolor="#131722",
-            plot_bgcolor="#0e1219",
-            font=dict(color="#d4d4d4", family="IBM Plex Mono"),
-            xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5"),
-            yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", ticksuffix="%", range=[0, 100]),
-            legend=dict(bgcolor="#0e1219", bordercolor="#2a3244", font=dict(color="#d4d4d4", size=9)),
+                       font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#080d1a",
+            plot_bgcolor="#0d1526",
+            font=dict(color="#e2e8f0", family="IBM Plex Mono"),
+            xaxis=dict(gridcolor="#1a2540", color="#4a5878"),
+            yaxis=dict(gridcolor="#1a2540", color="#4a5878", ticksuffix="%", range=[0, 100]),
+            legend=dict(bgcolor="#0d1526", bordercolor="#1a2540", font=dict(color="#e2e8f0", size=9)),
             height=380,
             margin=dict(l=20, r=20, t=40, b=20),
         )
@@ -1256,12 +1302,12 @@ def render_macro_dashboard():
         for f in factors:
             d = actual_sub[f] - target_sub[f]
             arrow = "+" if d >= 0 else ""
-            color = "#4caf50" if abs(d) < 3 else ("#ffa726" if abs(d) < 7 else "#f44336")
+            color = "#10b981" if abs(d) < 3 else ("#f59e0b" if abs(d) < 7 else "#ef4444")
             delta_html += (
-                f'<div style="background:#0e1219;border:1px solid {color};border-radius:3px;'
-                f'padding:6px 12px;text-align:center;min-width:80px;">'
-                f'<div style="color:#7a8ba5;font-size:0.65rem;letter-spacing:1px;">{factor_names[f].upper()}</div>'
-                f'<div style="color:{color};font-size:1rem;font-weight:500;">{arrow}{d:.1f}%</div>'
+                f'<div style="background:#0d1526;border:1px solid {color};border-radius:4px;'
+                f'padding:7px 14px;text-align:center;min-width:84px;">'
+                f'<div style="color:#4a5878;font-size:0.63rem;letter-spacing:1.2px;text-transform:uppercase;">{factor_names[f]}</div>'
+                f'<div style="color:{color};font-size:1rem;font-weight:500;margin-top:2px;">{arrow}{d:.1f}%</div>'
                 f'</div>'
             )
         delta_html += '</div>'
@@ -1274,16 +1320,12 @@ def render_macro_dashboard():
     if not result:
         terminal_text(
             "NO MACRO DATA LOADED\n\nClick [ INIT PORTFOLIO ] in the sidebar to fetch FRED indicators.",
-            color="#555"
+            color="#4a5878"
         )
         return
 
     # ── Macro Summary Table ──
-    st.markdown(
-        '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-        '═══ FRED MACRO INDICATORS ═══</div>',
-        unsafe_allow_html=True
-    )
+    bsep("FRED Macro Indicators")
     summary_rows = result.get("summary_rows", [])
     if summary_rows:
         df_macro = pd.DataFrame(summary_rows)[["indicator", "value", "unit", "trend", "interpretation"]]
@@ -1294,21 +1336,14 @@ def render_macro_dashboard():
     st.markdown("<br>", unsafe_allow_html=True)
     narrative = result.get("regime_narrative", "")
     if narrative:
-        st.markdown(
-            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;">'
-            '═══ MACRO REGIME NARRATIVE ═══</div>',
-            unsafe_allow_html=True
-        )
-        terminal_text(narrative, color="#d4d4d4")
+        bsep("Macro Regime Narrative")
+        terminal_text(narrative, color="#e2e8f0")
 
     # ── Axis Scoring (Phase 2) ──
     axis_scores = result.get("axis_scores", {})
     if axis_scores:
-        st.markdown(
-            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;margin-top:1rem;">'
-            '═══ AXIS SCORING BREAKDOWN ═══</div>',
-            unsafe_allow_html=True
-        )
+        st.markdown('<div style="margin-top:0.75rem;"></div>', unsafe_allow_html=True)
+        bsep("Axis Scoring Breakdown")
         axis_rows = []
         for axis, data in axis_scores.items():
             axis_rows.append({
@@ -1325,11 +1360,8 @@ def render_macro_dashboard():
         allocation = db.get_target_allocation()
 
     if allocation:
-        st.markdown(
-            '<div style="color:#ff9900;font-size:0.72rem;letter-spacing:2px;font-weight:500;margin-top:1rem;">'
-            '═══ STRATEGIC ALLOCATION ═══</div>',
-            unsafe_allow_html=True
-        )
+        st.markdown('<div style="margin-top:0.75rem;"></div>', unsafe_allow_html=True)
+        bsep("Strategic Allocation")
         df_alloc = pd.DataFrame(allocation)
         df_alloc = df_alloc.sort_values("weight_pct", ascending=False)
         df_alloc["weight_pct"] = df_alloc["weight_pct"].map(lambda x: f"{x:.2f}%")
@@ -1354,22 +1386,22 @@ def render_macro_dashboard():
             hole=0.4,
             marker=dict(
                 colors=[
-                    "#4caf50", "#2196f3", "#ff9900", "#f44336",
-                    "#26a69a", "#1565c0", "#e65100", "#b71c1c",
-                    "#66bb6a", "#42a5f5", "#ffa726", "#ef5350",
-                    "#1b5e20", "#0d47a1", "#bf360c", "#7f0000",
+                    "#10b981", "#3b82f6", "#f59e0b", "#ef4444",
+                    "#06b6d4", "#1d4ed8", "#ea580c", "#991b1b",
+                    "#34d399", "#60a5fa", "#fbbf24", "#f87171",
+                    "#064e3b", "#1e3a8a", "#9a3412", "#450a0a",
                 ],
-                line=dict(color="#131722", width=1),
+                line=dict(color="#080d1a", width=1),
             ),
-            textfont=dict(color="#ffffff", family="IBM Plex Mono", size=10),
+            textfont=dict(color="#e2e8f0", family="IBM Plex Mono", size=10),
             textinfo="label+percent",
         )])
         fig.update_layout(
-            title=dict(text="BUCKET ALLOCATION", font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-            paper_bgcolor="#131722",
-            plot_bgcolor="#131722",
-            font=dict(color="#d4d4d4", family="IBM Plex Mono"),
-            legend=dict(bgcolor="#0e1219", font=dict(color="#d4d4d4", size=9), bordercolor="#2a3244"),
+            title=dict(text="BUCKET ALLOCATION", font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#080d1a",
+            plot_bgcolor="#080d1a",
+            font=dict(color="#e2e8f0", family="IBM Plex Mono"),
+            legend=dict(bgcolor="#0d1526", font=dict(color="#e2e8f0", size=9), bordercolor="#1a2540"),
             height=500,
             margin=dict(l=20, r=20, t=40, b=20),
         )
@@ -1396,8 +1428,8 @@ def render_macro_dashboard():
         #                               Growth=cyan,     Value=orange
         #                               High Beta=red,   Low Beta=blue
         #                               US=bright-green, EM=yellow
-        first_colors  = ["#4caf50", "#00d4ff", "#f44336", "#66bb6a"]
-        second_colors = ["#ff9900", "#ff6600", "#2196f3", "#ffd600"]
+        first_colors  = ["#10b981", "#06b6d4", "#ef4444", "#34d399"]
+        second_colors = ["#f59e0b", "#f97316", "#3b82f6", "#fbbf24"]
 
         fig2 = go.Figure()
         fig2.add_trace(go.Bar(
@@ -1407,7 +1439,7 @@ def render_macro_dashboard():
             marker_color=first_colors,
             text=[f"{sub}: {sub_totals[sub]:.1f}%" for sub in first_subs],
             textposition="inside",
-            textfont=dict(color="#ffffff", size=10, family="IBM Plex Mono"),
+            textfont=dict(color="#e2e8f0", size=10, family="IBM Plex Mono"),
         ))
         fig2.add_trace(go.Bar(
             name="Cyclical / Value / Lo-β / EM",
@@ -1416,20 +1448,20 @@ def render_macro_dashboard():
             marker_color=second_colors,
             text=[f"{sub}: {sub_totals[sub]:.1f}%" for sub in second_subs],
             textposition="inside",
-            textfont=dict(color="#0e1219", size=10, family="IBM Plex Mono"),
+            textfont=dict(color="#080d1a", size=10, family="IBM Plex Mono"),
         ))
-        fig2.add_hline(y=70, line_dash="dot", line_color="#ffffff",
-                       annotation_text="70% CAP", annotation_font_color="#ffffff")
+        fig2.add_hline(y=70, line_dash="dot", line_color="#e2e8f0",
+                       annotation_text="70% CAP", annotation_font_color="#e2e8f0")
         fig2.update_layout(
             barmode="stack",
             title=dict(text="FACTOR EXPOSURE vs. 70% SUB-STRATEGY CAP",
-                       font=dict(color="#ff9900", family="IBM Plex Mono", size=13)),
-            paper_bgcolor="#131722",
-            plot_bgcolor="#0e1219",
-            font=dict(color="#d4d4d4", family="IBM Plex Mono"),
-            xaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5"),
-            yaxis=dict(gridcolor="#1e2a3a", color="#7a8ba5", range=[0, 110], ticksuffix="%"),
-            legend=dict(bgcolor="#0e1219", bordercolor="#2a3244", font=dict(color="#d4d4d4", size=9)),
+                       font=dict(color="#f59e0b", family="IBM Plex Mono", size=13)),
+            paper_bgcolor="#080d1a",
+            plot_bgcolor="#0d1526",
+            font=dict(color="#e2e8f0", family="IBM Plex Mono"),
+            xaxis=dict(gridcolor="#1a2540", color="#4a5878"),
+            yaxis=dict(gridcolor="#1a2540", color="#4a5878", range=[0, 110], ticksuffix="%"),
+            legend=dict(bgcolor="#0d1526", bordercolor="#1a2540", font=dict(color="#e2e8f0", size=9)),
             height=380,
             margin=dict(l=20, r=20, t=40, b=20),
         )
@@ -1443,10 +1475,10 @@ def main():
     render_sidebar()
 
     tab1, tab2, tab3, tab4 = st.tabs([
-        "[ TRADING FLOOR ]",
-        "[ PORTFOLIO ]",
-        "[ PERFORMANCE ]",
-        "[ MACRO DASHBOARD ]",
+        "TRADING FLOOR",
+        "PORTFOLIO",
+        "PERFORMANCE",
+        "MACRO",
     ])
 
     with tab1:
